@@ -24,7 +24,8 @@ public class PlayerController : Singleton<PlayerController>
 
     [SerializeField] LayerMask _layerMask;
     public bool chuyenhuong=true;
-    
+
+    public bool _isPause=true;
 
     [SerializeField] GameObject _bulletTrenNguoi;
 
@@ -44,23 +45,14 @@ public class PlayerController : Singleton<PlayerController>
     // Update is called once per frame
     void Update()
     {
-        rangAtk();
-        movePlayer();
-        if (_Target != null)
+        if (_isPause==false)
         {
-            addAnim();
-            animoPlayerATk();
-            //if (!_Target.gameObject.activeSelf)
-            //{
-            //    //_listEnemyTaget.Remove(_Target);
-            //    _Target = null;
-            //}
+            countDownAtk -= Time.deltaTime;
+            rangAtk();
+            movePlayer();
         }
-        else
-        {
-            
-            _AimSpriteRenderer.SetActive(false);
-        }
+        
+       
     }
 
     void movePlayer()
@@ -77,6 +69,17 @@ public class PlayerController : Singleton<PlayerController>
             if(chuyenhuong == true)
             {
                 checkDistance();
+                if (_Target != null)
+                {
+                    addAnim();
+                    animoPlayerATk();
+                   
+                }
+                else
+                {
+
+                    _AimSpriteRenderer.SetActive(false);
+                }
             }
             
                 quayhuong();
@@ -85,7 +88,7 @@ public class PlayerController : Singleton<PlayerController>
         }
         
         _isMoving = true;
-        chuyenhuong = true;
+        //chuyenhuong = true;
 
         transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(movement), 0.15f);
 
@@ -109,7 +112,7 @@ public class PlayerController : Singleton<PlayerController>
                 if (distance < attackRange && distance != 0)
                 {
                        _Target = z.transform;
-
+                   
                         break;
                     
                      // Thoát khỏi vòng lặp sau khi tìm thấy mục phù hợp
@@ -147,14 +150,13 @@ public class PlayerController : Singleton<PlayerController>
     }
     void animoPlayerATk()
     {
-        countDownAtk -= Time.deltaTime;
         if (countDownAtk > 0 || _isMoving == true)
             return;
         _animator.SetTrigger(CONSTANT.ATK);
 
         countDownAtk = _countDownAtkPlayer;
-        
 
+        //chuyenHuongTarget();
 
     }
     void playerATK()
@@ -169,10 +171,7 @@ public class PlayerController : Singleton<PlayerController>
         bulletPlayer.transform.rotation = this.transform.rotation;
         bulletPlayer.transform.localScale = _scalePlayer.transform.localScale;
         bulletPlayer.SetActive(true);
-        chuyenHuongTarget();
-
-      
-
+        
     }
     public void chuyenHuongTarget()
     {
@@ -186,7 +185,8 @@ public class PlayerController : Singleton<PlayerController>
         //_scalerRangAtk.gameObject.transform.localScale += Vector3.one * 0.5f;
         attackRange += 0.5f;
         _speed += 0.5f;
-        UiManager._instan.HoaTo();
+        //UiManager._instan.HoaTo
+        UIManager._instan.HoaTo();
     }
     private void OnDrawGizmos()
     {
@@ -214,7 +214,7 @@ public class PlayerController : Singleton<PlayerController>
     IEnumerator resetChuyenHuong()
     {
        
-        yield return new WaitForSeconds(2.5f);
+        yield return new WaitForSeconds(4f);
         chuyenhuong = true;
         _bulletTrenNguoi.SetActive(true);
         

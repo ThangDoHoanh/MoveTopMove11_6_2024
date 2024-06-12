@@ -8,12 +8,12 @@ using static UnityEditor.Progress;
 public class GameManager : Singleton<GameManager>
 {
     //[SerializeField] EnemyController _prefabEnemy;
-    
+    public CameraPlayer _cameraPlayer;
     [SerializeField] EnemyTest _prefabEnemyTest;
     [SerializeField] GameObject _gobjPlayer;
     public Transform _Player;
     public Collider platformCollider;
-    int _live;
+    public int _live;
     int _enemyCount=1;
     //public List<Transform> _listtarget = new List<Transform>();
 
@@ -26,8 +26,10 @@ public class GameManager : Singleton<GameManager>
     private void Start()
     {
         _listTarget.Add(_gobjPlayer);
-        _live = UiManager._instan._live;
-        StartCoroutine(InvokeAfterTime());
+
+        _cameraPlayer.enabled = false;
+
+
     }
     //public List<Transform> GetItems(Transform banthan)
     //{
@@ -35,7 +37,7 @@ public class GameManager : Singleton<GameManager>
     //    tempList.Remove(banthan); // Xóa bản thân khỏi bản sao
     //    tempList.RemoveAll(item => item == null || !item.gameObject.activeSelf); // Loại bỏ các mục không hợp lệ
 
-       
+
 
     //    // Trả về bản sao đã chỉnh sửa
     //    return tempList;
@@ -48,6 +50,10 @@ public class GameManager : Singleton<GameManager>
     //{
     //    _listtarget.Remove(aaa);
     //}
+    public void _startAddEnemy()
+    {
+        StartCoroutine(InvokeAfterTime());
+    }
         
     void addEnemy()
     {
@@ -76,8 +82,6 @@ public class GameManager : Singleton<GameManager>
         //    _enemyCount++;
 
         //}
-
-       
 
     }
 

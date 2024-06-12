@@ -95,9 +95,9 @@ public class BulletEnemyController : MonoBehaviour
             other.gameObject.GetComponent<Animator>().SetTrigger(CONSTANT.DEAD);
 
             other.gameObject.GetComponent<EnemyTest>().dangchet = true;
-           
 
-            UiManager._instan.setLive(1);
+            UIManager._instan.setLive(1);
+            //UiManager._instan.setLive(1);
             //GameManager._instan.removeList(other.transform);
 
             Debug.Log("-1!!");

@@ -6,6 +6,7 @@ public class CONSTANT
     public static string RUN = "Run";
     public static string ATK = "Atk";
     public static string BULLET = "Bullet";
+    public static string BULLETENEMY = "BulletEnemy";
     public static string FENCE = "Fence";
     public static string HIDDEN_WALL = "Hidden_Wall";
     public static string PLAYER = "Player";

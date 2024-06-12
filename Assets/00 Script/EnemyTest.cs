@@ -255,21 +255,37 @@ public class EnemyTest : MonoBehaviour
     }
 
    
-    void chet()
+    void Deading() //KHi enemy đang chết bời player giết
     {
+        PlayerController._instan.chuyenhuong = false;
         _capsuleCollider.enabled = false;
         _isMoving = false; // Dừng di chuyển
         _timeMove = 2f;
     }   
-    void chetHan()
+    void Dead()//khi enemy chết bởi player
     {
-        //PlayerTest._instan._canCheckTarget = true;
+        
+        PlayerController._instan.chuyenhuong = true;
         this.gameObject.SetActive(false);
     }
+  
     IEnumerator resetChuyenHuong()
     {
         yield return new WaitForSeconds(3f);
         chuyenhuong = true;
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.CompareTag(CONSTANT.BULLET))
+        {
+            _animatorEnemy.SetTrigger(CONSTANT.DEAD);
+            dangchet = true;
+            
+        }
+       
+
+    }
+
 
 }

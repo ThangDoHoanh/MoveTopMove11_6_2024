@@ -53,6 +53,8 @@ public class BulletPlayerController : MonoBehaviour
             StopCoroutine(_coroutine);
             _coroutine = null;
         }
+        PlayerController._instan.chuyenhuong = true;
+
     }
 
     // Update is called once per frame
@@ -84,15 +86,19 @@ public class BulletPlayerController : MonoBehaviour
 
             //PlayerTest._instan.hoaTo();
             //PlayerController._instan._Target = null;
-            
 
 
-            UiManager._instan.setScore(UnityEngine.Random.Range(1, 6));
+
+            //UiManager._instan.setScore(UnityEngine.Random.Range(1, 6));
+            //Debug.Log("+1!!!");
+            //UiManager._instan.setLive(1);
+
+            UIManager._instan.setScore(UnityEngine.Random.Range(1, 6));
             Debug.Log("+1!!!");
-            UiManager._instan.setLive(1);
+            UIManager._instan.setLive(1);
 
-            other.gameObject.GetComponent<Animator>().SetTrigger(CONSTANT.DEAD);
-            other.gameObject.GetComponent<EnemyTest>().dangchet = true;
+            //other.gameObject.GetComponent<Animator>().SetTrigger(CONSTANT.DEAD);
+            //other.gameObject.GetComponent<EnemyTest>().dangchet = true;
             
             //PlayerTest._instan.removList(other.transform);
             //GameManager._instan.removeList(other.transform);

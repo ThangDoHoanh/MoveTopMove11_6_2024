@@ -175,7 +175,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speedMove: 2
   attackRange: 7
-  _countDownAtkEnemy: 1
+  _countDownAtkEnemy: 2.5
   _timeMove: 3
   _listTaget: []
   _target: {fileID: 0}

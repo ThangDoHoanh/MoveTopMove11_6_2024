@@ -14,6 +14,7 @@ public class CONSTANT
     public static string ENEMYDANGATK = "EnemyDangATk";
     public static string DEAD = "Dead";
     public static string BAN = "Ban";
+    public static string DANCE = "Dance";
 
 }
 

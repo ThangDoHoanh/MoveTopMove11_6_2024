@@ -268,6 +268,7 @@ public class EnemyTest : MonoBehaviour
         PlayerController._instan.chuyenhuong = true;
         this.gameObject.SetActive(false);
     }
+
   
     IEnumerator resetChuyenHuong()
     {

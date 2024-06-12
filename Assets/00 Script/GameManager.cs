@@ -19,9 +19,14 @@ public class GameManager : Singleton<GameManager>
 
     public List<Material> _materialsEnemy= new List<Material>();
     public List<Material> _materialsPant = new List<Material>();
-    public List<Material> _material = new List<Material>();
+    public List<Material> _material_Fence = new List<Material>();
 
-   public List<GameObject> _listTarget = new List<GameObject>();
+    public List<GameObject> _listTarget = new List<GameObject>();
+    public List<Material> _materialAvataPlayer = new List<Material>();
+    public List<GameObject> _hairAvataPlayer = new List<GameObject>();
+    public List<GameObject> _spnieAvataPlayer = new List<GameObject>();
+    public List<GameObject> _lefpHandAvataPlayer = new List<GameObject>();
+
 
     private void Start()
     {

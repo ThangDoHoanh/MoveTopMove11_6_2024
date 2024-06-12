@@ -19,7 +19,7 @@ public class CheckFence : MonoBehaviour
             Renderer renderer = other.GetComponent<Renderer>();
             if(renderer != null)
             {
-                renderer.material = GameManager._instan._material[0];
+                renderer.material = GameManager._instan._material_Fence[0];
             }
         }
         if (other.gameObject.CompareTag(CONSTANT.BAN))
@@ -27,7 +27,7 @@ public class CheckFence : MonoBehaviour
             Renderer renderer = other.GetComponent<Renderer>();
             if (renderer != null)
             {
-                renderer.material = GameManager._instan._material[1];
+                renderer.material = GameManager._instan._material_Fence[1];
             }
         }
 
@@ -40,7 +40,7 @@ public class CheckFence : MonoBehaviour
             Renderer renderer = other.GetComponent<Renderer>();
             if (renderer != null)
             {
-                renderer.material = GameManager._instan._material[2];
+                renderer.material = GameManager._instan._material_Fence[2];
             }
         }
         if (other.gameObject.CompareTag(CONSTANT.BAN))
@@ -48,7 +48,7 @@ public class CheckFence : MonoBehaviour
             Renderer renderer = other.GetComponent<Renderer>();
             if (renderer != null)
             {
-                renderer.material = GameManager._instan._material[3];
+                renderer.material = GameManager._instan._material_Fence[3];
             }
         }
     }

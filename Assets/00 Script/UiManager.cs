@@ -13,18 +13,23 @@ public class UIManager : Singleton<UIManager>
 
     public Canvas _canvaMapPlaying;
     public Canvas _canvaMapHome;
+    public Canvas _canvaSkin;
+    
+
+    Vector3 _canvaEnemyPosition = new Vector3(0,5,0);
     private void Start()
     {
+        _canvaSkin.gameObject.SetActive(false);
         _canvaMapPlaying.gameObject.SetActive(false);
         _canvaMapHome.gameObject.SetActive(true);
         _livetime = GameManager._instan._live;
         updateText();
-        setVitriScore();
+       
     }
     private void Update()
     {
         updateText();
-
+        setVitriScore();
     }
 
     public void setScore(int score)
@@ -47,11 +52,14 @@ public class UIManager : Singleton<UIManager>
 
     void setVitriScore()
     {
-        //_scoreText.transform.position = Camera.main.WorldToScreenPoint(PlayerTest._instan.gameObject.transform.position+ new Vector3(0,5f,0));
-        _scoreText.transform.position = Camera.main.WorldToScreenPoint(PlayerController._instan.gameObject.transform.position + new Vector3(0, 7f, 0));
+        Vector3 enemyScreenPosition = Camera.main.WorldToScreenPoint(PlayerController._instan.transform.position + _canvaEnemyPosition);
+        //_scoreText.transform.position = Camera.main.WorldToScreenPoint(PlayerController._instan.gameObject.transform.position + new Vector3(0, 5f, 0));
+
+        _scoreText.transform.position = enemyScreenPosition;
     }
     public void HoaTo()
     {
-        _scoreText.rectTransform.anchoredPosition += new Vector2(0, 10f);
+        _canvaEnemyPosition += new Vector3(0, 1,0);
+        Debug.Log("ZZZZ!");
     }
 }

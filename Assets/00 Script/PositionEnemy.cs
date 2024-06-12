@@ -10,22 +10,15 @@ public class PositionEnemy : MonoBehaviour
     [SerializeField] Image _ImageEnmyVT; // Hình ảnh hiển thị phía trên kẻ địch
     [SerializeField] Text _TxtEnemyVT;
 
-    private void Awake()
-    {
-
-    }
-    void Start()
-    {
-          
-    }
+    
 
     // Update is called once per frame
     void Update()
     {
-        testttt();
+        positonEnemy();
 
     }
-     void testttt()
+     void positonEnemy()//set vị trí canva trên đầu enemy;
      {
         Vector3 enemyScreenPosition = Camera.main.WorldToScreenPoint(this.transform.position + new Vector3(0, 2, 0));
         float minX = _ImageEnmyVT.GetPixelAdjustedRect().width / 2;

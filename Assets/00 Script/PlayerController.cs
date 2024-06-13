@@ -19,7 +19,7 @@ public class PlayerController : Singleton<PlayerController>
     public Transform _scalePlayer;
     [SerializeField] CameraPlayer _camera;
 
-    [SerializeField] SpriteRenderer _spriteRenderer;//RangeATKRenderer
+    public SpriteRenderer _spriteRenderer;//RangeATKRenderer
     [SerializeField] GameObject _AimSpriteRenderer;//Aim
 
     [SerializeField] LayerMask _layerMask;
@@ -227,53 +227,5 @@ public class PlayerController : Singleton<PlayerController>
     {
         _animator.SetBool(CONSTANT.DANCE, _setAnim);
     }
-
-    public void SetPlay1()
-    {
-        GameObject _hairclone = ObjectPooling._instan.GetObjectparent(GameManager._instan._hairAvataPlayer[0], _hair.transform);
-        _hairclone.SetActive(true);
-       
-
-        GameObject _spnieclone = ObjectPooling._instan.GetObjectparent(GameManager._instan._spnieAvataPlayer[0], _spnie.transform);
-        _spnieclone.SetActive(true);
-        _skinnedPlayer.material = GameManager._instan._materialAvataPlayer[0];
-    }
-    public void SetActifSetPlay()
-    {
-        foreach (Transform child in _hair.transform)
-        {
-            child.gameObject.SetActive(false);
-        }
-
-        // Tắt tất cả các đối tượng con của _spnie
-        foreach (Transform child in _spnie.transform)
-        {
-            child.gameObject.SetActive(false);
-        }
-
-        // Kiểm tra nếu _lefpHand.transform có con trước khi truy cập
-        if (_lefpHand.transform.childCount > 0)
-        {
-            // Tắt tất cả các đối tượng con của _lefpHand
-            foreach (Transform child in _lefpHand.transform)
-            {
-                child.gameObject.SetActive(false);
-            }
-        }
-    }    
-       
-    public void SetPlay2()
-    {
-        GameObject _hairclone = ObjectPooling._instan.GetObjectparent(GameManager._instan._hairAvataPlayer[1], _hair.transform);
-        _hairclone.SetActive(true);
-
-        GameObject _spnieclone = ObjectPooling._instan.GetObjectparent(GameManager._instan._spnieAvataPlayer[1], _spnie.transform);
-        _spnieclone.SetActive(true);
-
-        GameObject _lefpHandclone = ObjectPooling._instan.GetObjectparent(GameManager._instan._lefpHandAvataPlayer[0], _lefpHand.transform);
-        _lefpHandclone.SetActive(true);
-        _skinnedPlayer.material = GameManager._instan._materialAvataPlayer[1];
-    }
-
 
 }

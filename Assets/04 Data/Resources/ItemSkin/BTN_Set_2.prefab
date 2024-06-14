@@ -144,6 +144,7 @@ MonoBehaviour:
   _BTNbuy: {fileID: 5857197448945776765}
   _imageItem: {fileID: 5221026324762246619}
   _conts: {fileID: 5250337254721985463}
+  _obj3d: {fileID: 0}
 --- !u!114 &3609142025526798558
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -17,6 +17,12 @@ public class UIManager : Singleton<UIManager>
     
 
     Vector3 _canvaEnemyPosition = new Vector3(0,5,0);
+    [Header("---------BTN_BUY---------")]
+    public Button _btnBuy;
+    public Button _btnOwnde;
+    public Text _txtconts;
+    public Text _txtselect;
+
     private void Start()
     {
         _canvaSkin.gameObject.SetActive(false);

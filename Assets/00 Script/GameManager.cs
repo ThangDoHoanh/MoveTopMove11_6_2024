@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using static UnityEditor.Experimental.GraphView.GraphView;
@@ -15,25 +16,43 @@ public class GameManager : Singleton<GameManager>
     public Collider platformCollider;
     public int _live;
     int _enemyCount=1;
-    //public List<Transform> _listtarget = new List<Transform>();
+    
 
     public List<Material> _materialsEnemy= new List<Material>();
     public List<Material> _materialsPant = new List<Material>();
     public List<Material> _material_Fence = new List<Material>();
-
+    
     public List<GameObject> _listTarget = new List<GameObject>();
+   
     public List<Material> _materialAvataPlayer = new List<Material>();
+    [Header("----ListPlayer-----")]
+    public List<GameObject> _skinPlayer = new List<GameObject>();
     public List<GameObject> _hairAvataPlayer = new List<GameObject>();
     public List<GameObject> _spnieAvataPlayer = new List<GameObject>();
     public List<GameObject> _lefpHandAvataPlayer = new List<GameObject>();
-
-
+    [Header("----Conts-----")]
+    public int _contsPlayer;
+   
     private void Start()
     {
         _listTarget.Add(_gobjPlayer);
 
         _cameraPlayer.enabled = false;
-
+        if (_hairAvataPlayer != null)
+        {
+            _hairAvataPlayer.Clear();
+        }
+        _hairAvataPlayer = Resources.LoadAll<GameObject>("prefabBodyHair").ToList();
+        if (_lefpHandAvataPlayer != null)
+        {
+            _lefpHandAvataPlayer.Clear();
+        }
+        _lefpHandAvataPlayer = Resources.LoadAll<GameObject>("prefabBodyLefhand").ToList();
+        if (_lefpHandAvataPlayer != null)
+        {
+            _lefpHandAvataPlayer.Clear();
+        }
+        _lefpHandAvataPlayer = Resources.LoadAll<GameObject>("prefabBodyLefhand").ToList();
 
     }
     //public List<Transform> GetItems(Transform banthan)

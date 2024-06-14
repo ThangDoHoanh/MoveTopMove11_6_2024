@@ -95,5 +95,37 @@ public class ShopManager : Singleton<ShopManager>
         _listImageBTNShop[3].color = Color.red;
         _shopSkinnedPlayer.SetActive(true);
     }
+    public void SetItemTest(GameObject itemPrefab, ItemType itemType)
+    {
+        switch (itemType)
+        {
+            case ItemType.Hair:
+                GameObject hairInstance = ObjectPooling._instan.GetObjectparent(itemPrefab, _hair.transform);
+                hairInstance.SetActive(true);
+                break;
+
+            case ItemType.Spine:
+                GameObject spineInstance = ObjectPooling._instan.GetObjectparent(itemPrefab, _spnie.transform);
+                spineInstance.SetActive(true);
+                break;
+
+            case ItemType.LeftHand:
+                GameObject leftHandInstance = ObjectPooling._instan.GetObjectparent(itemPrefab, _lefpHand.transform);
+                leftHandInstance.SetActive(true);
+                break;
+
+            case ItemType.Skin:
+                // Gán material cho người chơi
+                if (itemPrefab.TryGetComponent(out Renderer renderer))
+                {
+                    _skinnedPlayer.material = renderer.material;
+                }
+                break;
+
+            default:
+                Debug.LogWarning("Unknown item type.");
+                break;
+        }
+    }    
 
 }

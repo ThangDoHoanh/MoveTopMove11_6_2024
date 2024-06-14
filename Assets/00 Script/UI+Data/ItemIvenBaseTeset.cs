@@ -6,4 +6,6 @@ public abstract class ItemIvenBaseTeset : MonoBehaviour
 {
     [SerializeField]
     protected ITemDataSO _info;
+   
+
 }

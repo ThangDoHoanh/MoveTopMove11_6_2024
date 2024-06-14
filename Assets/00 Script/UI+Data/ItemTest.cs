@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEditorInternal;
 using UnityEngine;
@@ -16,6 +17,7 @@ public class ItemTest : ItemIvenBaseTeset
 
     private void Awake()
     {
+       
         _buy = UIManager._instan._btnBuy;
         _isOwnde = UIManager._instan._btnOwnde;
         _conts = UIManager._instan._txtconts;
@@ -49,16 +51,51 @@ public class ItemTest : ItemIvenBaseTeset
                     switch (_info._itemType)
                     {
                         case ItemType.Hair:
-                            ShopManager._instan.SetItemTest(GameManager._instan._hairAvataPlayer[_info._id], ItemType.Hair);
+                            ShopManager._instan.SetItemTest(_info._id, ItemType.Hair);
                             break;
                         case ItemType.Spine:
-                            ShopManager._instan.SetItemTest(GameManager._instan._spnieAvataPlayer[_info._id], ItemType.Spine);
+                            ShopManager._instan.SetItemTest(_info._id, ItemType.Spine);
                             break;
                         case ItemType.LeftHand:
-                            ShopManager._instan.SetItemTest(GameManager._instan._lefpHandAvataPlayer[_info._id], ItemType.LeftHand);
+                            ShopManager._instan.SetItemTest(_info._id, ItemType.LeftHand);
+                            break;
+                        case ItemType.Pants:
+                            ShopManager._instan.SetItemTest(_info._id, ItemType.Pants);
                             break;
                         case ItemType.Skin:
-                            ShopManager._instan.SetItemTest(GameManager._instan._skinPlayer[_info._id], ItemType.Skin);
+                            ShopManager._instan.SetItemTest(_info._id, ItemType.Skin);
+
+                            if (_info._hairSkin != null)
+                            {
+                                GameObject SkinhairInstance = ObjectPooling._instan.GetObjectparent(_info._hairSkin, ShopManager._instan._hair.transform);
+                                SkinhairInstance.SetActive(true);
+                            }
+                            else
+                            {
+                                Debug.LogWarning("Hair skin prefab is not assigned in ItemDataSO.");
+                            }
+
+                            if (_info._SpineSkin != null)
+                            {
+                                GameObject SkinspineInstance = ObjectPooling._instan.GetObjectparent(_info._SpineSkin, ShopManager._instan._spnie.transform);
+                                SkinspineInstance.SetActive(true);
+                            }
+                            else
+                            {
+                                Debug.LogWarning("Spine skin prefab is not assigned in ItemDataSO.");
+                            }
+
+                            if (_info._LefpHandSkin != null)
+                            {
+                                GameObject SkinleftHandInstance = ObjectPooling._instan.GetObjectparent(_info._LefpHandSkin, ShopManager._instan._lefpHand.transform);
+                                SkinleftHandInstance.SetActive(true);
+                            }
+                            else
+                            {
+                                Debug.LogWarning("Left hand skin prefab is not assigned in ItemDataSO.");
+                            }
+
+
                             break;
                         default:
                             Debug.LogWarning("Unknown item type.");
@@ -98,5 +135,10 @@ public class ItemTest : ItemIvenBaseTeset
             // Người chơi không đủ tiền để mua
             Debug.Log("bạn nghèo !");
         }
+    }    
+
+    void CheckSkin()
+    {
+
     }    
 }

@@ -46,7 +46,7 @@ public class TestShopSkinManager : Singleton<TestShopSkinManager>
             GameObject instance = ObjectPooling._instan.GetObjectparent(itemPrefab, _girlayoutLefpHande.transform);
             instance.SetActive(true);
         }
-        foreach (GameObject itemPrefab in _itemLefpHande)
+        foreach (GameObject itemPrefab in _itemPants)
         {
             GameObject instance = ObjectPooling._instan.GetObjectparent(itemPrefab, _girlayoutPants.transform);
             instance.SetActive(true);

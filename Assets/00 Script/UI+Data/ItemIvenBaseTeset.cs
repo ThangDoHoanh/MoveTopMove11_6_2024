@@ -5,7 +5,7 @@ using UnityEngine;
 public abstract class ItemIvenBaseTeset : MonoBehaviour
 {
     [SerializeField]
-    protected ITemDataSO _info;
+    public ITemDataSO _info;
    
 
 }

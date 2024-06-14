@@ -28,28 +28,23 @@ public class GameManager : Singleton<GameManager>
     [Header("----ListPlayer-----")]
     public List<GameObject> _skinPlayer = new List<GameObject>();
     public List<GameObject> _hairAvataPlayer = new List<GameObject>();
-    public List<Material> _hairPantsPlayer = new List<Material>();
+    public List<Material> _PantsPlayer = new List<Material>();
     public List<GameObject> _spnieAvataPlayer = new List<GameObject>();
     public List<GameObject> _lefpHandAvataPlayer = new List<GameObject>();
     [Header("----Conts-----")]
     public int _contsPlayer;
    
+
     private void Start()
     {
         _listTarget.Add(_gobjPlayer);
 
         _cameraPlayer.enabled = false;
-        if (_hairAvataPlayer != null)
-        {
-            _hairAvataPlayer.Clear();
-        }
+        
         _hairAvataPlayer = Resources.LoadAll<GameObject>("prefabBodyHair").ToList();
-        if (_lefpHandAvataPlayer != null)
-        {
-            _lefpHandAvataPlayer.Clear();
-        }
         _lefpHandAvataPlayer = Resources.LoadAll<GameObject>("prefabBodyLefhand").ToList();
-      
+        
+        _PantsPlayer = Resources.LoadAll<Material>("prefabBodyPants").ToList();
     }
     
     public void _startAddEnemy()

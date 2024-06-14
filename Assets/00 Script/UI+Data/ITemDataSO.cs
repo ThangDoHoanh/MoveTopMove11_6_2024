@@ -8,7 +8,12 @@ public class ITemDataSO : ScriptableObject
     public string _name;
     public int _conts;
     public bool _owned;
-   public ItemType _itemType;
+    public ItemType _itemType;
+
+    public GameObject _hairSkin;
+    public GameObject _LefpHandSkin;
+    public GameObject _SpineSkin;
+
 }
 public enum ItemType
 {

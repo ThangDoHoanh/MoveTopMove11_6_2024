@@ -6,7 +6,6 @@ public class ITemDataSO : ScriptableObject
 {
     public int _id;
     public string _name;
-    public Sprite _sprite;
     public int _conts;
     public bool _owned;
    public ItemType _itemType;
@@ -14,6 +13,7 @@ public class ITemDataSO : ScriptableObject
 public enum ItemType
 {
      Hair,
+     Pants,
     Spine,
     LeftHand,
     Skin,

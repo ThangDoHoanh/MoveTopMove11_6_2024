@@ -50,24 +50,7 @@ public class ButtonController : MonoBehaviour
 
             });
         }
-        if (_BTLPlayAvatar1 != null)
-        {
-            _BTLPlayAvatar1.onClick.AddListener(() =>
-            {
-                ShopManager._instan.ResetActifSetPlay();
-                ShopManager._instan.SetSkinPlay1();
-
-            });
-        }
-        if (_BTLPlayAvatar2 != null)
-        {
-            _BTLPlayAvatar2.onClick.AddListener(() =>
-            {
-                ShopManager._instan.ResetActifSetPlay();
-                ShopManager._instan.SetSkinPlay2();
-
-            });
-        }
+        
         if (_BTLShopHair != null)
         {
             _BTLShopHair.onClick.AddListener(() =>

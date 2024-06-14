@@ -28,6 +28,7 @@ public class GameManager : Singleton<GameManager>
     [Header("----ListPlayer-----")]
     public List<GameObject> _skinPlayer = new List<GameObject>();
     public List<GameObject> _hairAvataPlayer = new List<GameObject>();
+    public List<Material> _hairPantsPlayer = new List<Material>();
     public List<GameObject> _spnieAvataPlayer = new List<GameObject>();
     public List<GameObject> _lefpHandAvataPlayer = new List<GameObject>();
     [Header("----Conts-----")]
@@ -48,32 +49,9 @@ public class GameManager : Singleton<GameManager>
             _lefpHandAvataPlayer.Clear();
         }
         _lefpHandAvataPlayer = Resources.LoadAll<GameObject>("prefabBodyLefhand").ToList();
-        if (_lefpHandAvataPlayer != null)
-        {
-            _lefpHandAvataPlayer.Clear();
-        }
-        _lefpHandAvataPlayer = Resources.LoadAll<GameObject>("prefabBodyLefhand").ToList();
-
+      
     }
-    //public List<Transform> GetItems(Transform banthan)
-    //{
-    //    List<Transform> tempList = new List<Transform>(_listtarget); // Tạo một bản sao của _listtarget
-    //    tempList.Remove(banthan); // Xóa bản thân khỏi bản sao
-    //    tempList.RemoveAll(item => item == null || !item.gameObject.activeSelf); // Loại bỏ các mục không hợp lệ
-
-
-
-    //    // Trả về bản sao đã chỉnh sửa
-    //    return tempList;
-    //}
-    //public void addList(Transform aaa)
-    //{
-    //    _listtarget.Add(aaa);
-    //}    
-    //public void removeList(Transform aaa)
-    //{
-    //    _listtarget.Remove(aaa);
-    //}
+    
     public void _startAddEnemy()
     {
         StartCoroutine(InvokeAfterTime());

@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -19,49 +20,71 @@ public class ShopManager : Singleton<ShopManager>
     public GameObject _shopLefphand;
     public GameObject _shopSkinnedPlayer;
     // Start is called before the first frame update
-    public void ResetActifSetPlay()
+    public void ResetActifSetPlay(ItemType _type)
     {
-        foreach (Transform child in _hair.transform)
-        {
-            child.gameObject.SetActive(false);
-        }
+        //foreach (Transform child in _hair.transform)
+        //{
+        //    child.gameObject.SetActive(false);
+        //}
 
-        // Tắt tất cả các đối tượng con của _spnie
-        foreach (Transform child in _spnie.transform)
-        {
-            child.gameObject.SetActive(false);
-        }
+        //// Tắt tất cả các đối tượng con của _spnie
+        //foreach (Transform child in _spnie.transform)
+        //{
+        //    child.gameObject.SetActive(false);
+        //}
 
-        // Kiểm tra nếu _lefpHand.transform có con trước khi truy cập
-        if (_lefpHand.transform.childCount > 0)
+        //// Kiểm tra nếu _lefpHand.transform có con trước khi truy cập
+        //if (_lefpHand.transform.childCount > 0)
+        //{
+        //    // Tắt tất cả các đối tượng con của _lefpHand
+        //    foreach (Transform child in _lefpHand.transform)
+        //    {
+        //        child.gameObject.SetActive(false);
+        //    }
+        //}
+        switch (_type)
         {
-            // Tắt tất cả các đối tượng con của _lefpHand
-            foreach (Transform child in _lefpHand.transform)
-            {
-                child.gameObject.SetActive(false);
-            }
+            case ItemType.Hair:
+                foreach (Transform child in _hair.transform)
+                {
+                    child.gameObject.SetActive(false);
+                }
+                break;
+
+            case ItemType.Spine:
+                foreach (Transform child in _spnie.transform)
+                {
+                    child.gameObject.SetActive(false);
+                }
+                break;
+            case ItemType.Pants:
+                foreach (Transform child in _spnie.transform)
+                {
+                    child.gameObject.SetActive(false);
+                }
+                break;
+
+            case ItemType.LeftHand:
+                if (_lefpHand.transform.childCount > 0)
+                {
+                    foreach (Transform child in _lefpHand.transform)
+                    {
+                        child.gameObject.SetActive(false);
+                    }
+                }
+                break;
+
+            // Thêm các case cho các loại item khác cần reset
+            case ItemType.Skin:
+                // Không cần thực hiện reset nếu itemType là Skin
+                break;
+
+            default:
+                Debug.LogWarning("Unknown item type.");
+                break;
         }
     }
-    public void SetSkinPlay1()
-    {
-        GameObject _hairclone = ObjectPooling._instan.GetObjectparent(GameManager._instan._hairAvataPlayer[0], _hair.transform);
-        _hairclone.SetActive(true);
-        GameObject _spnieclone = ObjectPooling._instan.GetObjectparent(GameManager._instan._spnieAvataPlayer[0], _spnie.transform);
-        _spnieclone.SetActive(true);
-        _skinnedPlayer.material = GameManager._instan._materialAvataPlayer[0];
-    }
-    public void SetSkinPlay2()
-    {
-        GameObject _hairclone = ObjectPooling._instan.GetObjectparent(GameManager._instan._hairAvataPlayer[1], _hair.transform);
-        _hairclone.SetActive(true);
-
-        GameObject _spnieclone = ObjectPooling._instan.GetObjectparent(GameManager._instan._spnieAvataPlayer[1], _spnie.transform);
-        _spnieclone.SetActive(true);
-
-        GameObject _lefpHandclone = ObjectPooling._instan.GetObjectparent(GameManager._instan._lefpHandAvataPlayer[0], _lefpHand.transform);
-        _lefpHandclone.SetActive(true);
-        _skinnedPlayer.material = GameManager._instan._materialAvataPlayer[1];
-    }
+    
 
     public void resetBTN()
     {
@@ -113,7 +136,7 @@ public class ShopManager : Singleton<ShopManager>
                 GameObject leftHandInstance = ObjectPooling._instan.GetObjectparent(itemPrefab, _lefpHand.transform);
                 leftHandInstance.SetActive(true);
                 break;
-
+           
             case ItemType.Skin:
                 // Gán material cho người chơi
                 if (itemPrefab.TryGetComponent(out Renderer renderer))

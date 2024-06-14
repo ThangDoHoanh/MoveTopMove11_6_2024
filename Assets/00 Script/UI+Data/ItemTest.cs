@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class ItemTest : ItemIvenBaseTeset
 {
     [SerializeField] Button _BTNbuy;
-    [SerializeField] Image _imageItem;
+    
     [SerializeField] Text _conts;
     [SerializeField] Text _select;
     [SerializeField] Button _buy;
@@ -26,18 +26,13 @@ public class ItemTest : ItemIvenBaseTeset
         {
             _BTNbuy.onClick.AddListener(() =>
             {
+                UIManager._instan._imagepick.transform.SetParent(_BTNbuy.transform, false);
+                UIManager._instan._imagepick.gameObject.SetActive(true);
                 checkOwnde();
             });
         }
     }
-    private void OnDrawGizmosSelected()
-    {
-        if (_info._sprite != null)
-        {
-            _imageItem.sprite = _info._sprite;
-        }
-       
-    }
+    
     void checkOwnde ()//kiểm tra xem có đang sở hữu k
     {
         if (_info._owned == true)
@@ -50,7 +45,7 @@ public class ItemTest : ItemIvenBaseTeset
             {
                 _isOwnde.onClick.AddListener(() =>
                 {
-                    ShopManager._instan.ResetActifSetPlay();
+                    ShopManager._instan.ResetActifSetPlay(_info._itemType);
                     switch (_info._itemType)
                     {
                         case ItemType.Hair:

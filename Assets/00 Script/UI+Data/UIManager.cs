@@ -22,9 +22,11 @@ public class UIManager : Singleton<UIManager>
     public Button _btnOwnde;
     public Text _txtconts;
     public Text _txtselect;
+    public GameObject _imagepick;
 
     private void Start()
     {
+        _imagepick.gameObject.SetActive(false);
         _canvaSkin.gameObject.SetActive(false);
         _canvaMapPlaying.gameObject.SetActive(false);
         _canvaMapHome.gameObject.SetActive(true);

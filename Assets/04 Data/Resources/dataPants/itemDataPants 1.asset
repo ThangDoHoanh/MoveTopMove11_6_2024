@@ -17,3 +17,6 @@ MonoBehaviour:
   _conts: 100
   _owned: 0
   _itemType: 1
+  _hairSkin: {fileID: 0}
+  _LefpHandSkin: {fileID: 0}
+  _SpineSkin: {fileID: 0}

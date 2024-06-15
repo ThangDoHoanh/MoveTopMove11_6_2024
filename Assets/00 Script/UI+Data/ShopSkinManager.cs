@@ -1,10 +1,10 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class TestShopSkinManager : Singleton<TestShopSkinManager>
+public class ShopSkinManager : Singleton<ShopSkinManager>
 {
     [SerializeField] Transform _girlayoutSkin;
     [SerializeField] Transform _girlayoutHair;
@@ -20,7 +20,7 @@ public class TestShopSkinManager : Singleton<TestShopSkinManager>
     [SerializeField] List<GameObject> _itemLefpHande = new List<GameObject>();
     [SerializeField] List<GameObject> _itemPants = new List<GameObject>();
 
-    void Start()
+    void Start()// bắt đầu chạy thì add các prefab button vào list
     {
         _itemPants = Resources.LoadAll<GameObject>("ItemPants").ToList();
         _itemLefpHande = Resources.LoadAll<GameObject>("ItemLefpHande").ToList();
@@ -28,7 +28,7 @@ public class TestShopSkinManager : Singleton<TestShopSkinManager>
         itemHair = Resources.LoadAll<GameObject>("ItemHair").ToList();
         Init();
     }
-    void Init()
+    void Init() // sau khi add vào list thì t thực hiện sinh ra ở các shop
     {
         foreach (GameObject item in itemSkin)
         {

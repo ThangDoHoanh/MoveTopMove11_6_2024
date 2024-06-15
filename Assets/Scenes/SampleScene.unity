@@ -1975,7 +1975,7 @@ MonoBehaviour:
   - {fileID: 8497430101577214254, guid: 4614c1455ca553440b286736b5c4b164, type: 3}
   - {fileID: 1239407030522431728, guid: f118959b6f2692740bd674cb1498a683, type: 3}
   _lefpHandAvataPlayer: []
-  _contsPlayer: 3000
+  _contsPlayer: 1000
 --- !u!114 &799630769
 MonoBehaviour:
   m_ObjectHideFlags: 0

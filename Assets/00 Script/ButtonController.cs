@@ -38,6 +38,7 @@ public class ButtonController : MonoBehaviour
                 UIManager._instan._canvaSkin.gameObject.SetActive(true);
                 UIManager._instan._canvaMapHome.gameObject.SetActive(false);
                 PlayerController._instan.SetMapSkin(true);
+                ShopManager._instan.setShopHair();
             });
         }
         if (_BTLBackHome != null)

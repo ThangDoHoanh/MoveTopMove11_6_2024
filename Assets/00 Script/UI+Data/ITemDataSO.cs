@@ -1,8 +1,8 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 [CreateAssetMenu(fileName = "itemData", menuName = "Item")]
-public class ITemDataSO : ScriptableObject
+public class ITemDataSO : ScriptableObject // khai báo data ở ScriptableObject (cách lưu dữ liệu của unity)
 {
     public int _id;
     public string _name;

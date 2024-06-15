@@ -1,11 +1,23 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Net.NetworkInformation;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class ShopManager : Singleton<ShopManager>
 {
+    public enum ShopType
+    {
+        None,
+        Hair,
+        Pants,
+        LeftHand,
+        Skin
+    }
+
+    public ShopType currentShop = ShopType.None;
+
     [Header("-----SetBody------")]
     public GameObject _hair;
     public GameObject _spnie;
@@ -21,71 +33,72 @@ public class ShopManager : Singleton<ShopManager>
     public GameObject _shopLefphand;
     public GameObject _shopSkinnedPlayer;
 
-
-
-    // Start is called before the first frame update
     public void ResetActifSetPlay(ItemType _type)
     {
-        switch (_type)
+        switch (currentShop)
         {
-            case ItemType.Hair:
-                foreach (Transform child in _hair.transform)
+            case ShopType.Hair:
+                if (_type == ItemType.Hair)
                 {
-                    child.gameObject.SetActive(false);
-                }
-                break;
-
-            case ItemType.Spine:
-                foreach (Transform child in _spnie.transform)
-                {
-                    child.gameObject.SetActive(false);
-                }
-                break;
-
-            case ItemType.Pants:
-                // Không cần thực hiện reset cho pants trong trường hợp này vì không phải là skin
-                break;
-
-            case ItemType.LeftHand:
-                if (_lefpHand.transform.childCount > 0)
-                {
-                    foreach (Transform child in _lefpHand.transform)
+                    foreach (Transform child in _hair.transform)
                     {
                         child.gameObject.SetActive(false);
                     }
                 }
                 break;
 
-            case ItemType.Skin:
-                // Reset skin cho _skinnedPlayer (body skin)
-                _skinnedPlayer.material = null;
+            case ShopType.Pants:
+                if (_type == ItemType.Pants)
+                {
+                    // Không cần thực hiện reset cho pants trong trường hợp này vì không phải là skin
+                }
+                break;
 
-                // Đặt lại các prefab cho skin của từng phần (hair, spine, left hand)
-                // Tắt các prefab cũ trước khi đặt lại
-                foreach (Transform child in _hair.transform)
+            case ShopType.LeftHand:
+                if (_type == ItemType.LeftHand)
                 {
-                    child.gameObject.SetActive(false);
+                    if (_lefpHand.transform.childCount > 0)
+                    {
+                        foreach (Transform child in _lefpHand.transform)
+                        {
+                            child.gameObject.SetActive(false);
+                        }
+                    }
                 }
-                foreach (Transform child in _spnie.transform)
+                break;
+
+            case ShopType.Skin:
+                if (_type == ItemType.Skin)
                 {
-                    child.gameObject.SetActive(false);
-                }
-                if (_lefpHand.transform.childCount > 0)
-                {
-                    foreach (Transform child in _lefpHand.transform)
+                    // Reset skin cho _skinnedPlayer (body skin)
+                    _skinnedPlayer.material = null;
+
+                    // Đặt lại các prefab cho skin của từng phần (hair, spine, left hand)
+                    foreach (Transform child in _hair.transform)
                     {
                         child.gameObject.SetActive(false);
+                    }
+                    foreach (Transform child in _spnie.transform)
+                    {
+                        child.gameObject.SetActive(false);
+                    }
+                    if (_lefpHand.transform.childCount > 0)
+                    {
+                        foreach (Transform child in _lefpHand.transform)
+                        {
+                            child.gameObject.SetActive(false);
+                        }
                     }
                 }
                 break;
 
             default:
-                Debug.LogWarning("Unknown item type.");
+                Debug.LogWarning("Unknown or irrelevant item type for the current shop.");
                 break;
         }
     }
 
-    public void resetBTN()
+    public void resetBTN()// mỗi lần  uesr ấn chuyển shop thì reset lại btn
     {
         foreach (Transform child in _panelShop.transform)
         {
@@ -93,31 +106,40 @@ public class ShopManager : Singleton<ShopManager>
         }
         foreach (Image child in _listImageBTNShop)
         {
-            child.color = new Color(0.3660378f, 0.2866145f, 0.2866145f);
+            child.color = new Color(0.3660378f, 0.2866145f, 0.2866145f);// đổi màu lại cho giống màu btn shop ban đầu
         }
 
     }
-    public void setShopHair()
+
+    public void SetCurrentShop(ShopType shopType)// Đặt trạng thái cho shop
     {
-        _listImageBTNShop[0].color=Color.red;
+        currentShop = shopType;
+    }
+    public void setShopHair()//KHi uesr bấm vào btn shop Skin thì chạy đến hàm này và khi chuyển từ home sang canva skin
+    {
+        SetCurrentShop(ShopType.Hair);
+        _listImageBTNShop[0].color=Color.red; //đổi màu đỏ cho shop đang được chọn
         _shopHair.SetActive(true);
     }
     public void setShopPants()
     {
-        _listImageBTNShop[1].color = Color.red;
+        SetCurrentShop(ShopType.Pants);
+        _listImageBTNShop[1].color = Color.red; //đổi màu đỏ cho shop đang được chọn
         _shopPants.SetActive(true);
     }
     public void setShopLefphand()
     {
-        _listImageBTNShop[2].color = Color.red;
+        SetCurrentShop(ShopType.LeftHand);
+        _listImageBTNShop[2].color = Color.red;//đổi màu đỏ cho shop đang được chọn
         _shopLefphand.SetActive(true);
     }
-    public void setShopSkin()
+    public void setShopSkin()//KHi uesr bấm vào btn shop Skin thì chạy đến hàm này
     {
-        _listImageBTNShop[3].color = Color.red;
+        SetCurrentShop(ShopType.Skin);
+        _listImageBTNShop[3].color = Color.red;//đổi màu đỏ cho shop đang được chọn
         _shopSkinnedPlayer.SetActive(true);
     }
-    public void SetItemTest(int _id, ItemType itemType)
+    public void SetItemTest(int _id, ItemType itemType)// uesr ấn Button Select thì khi ở shop nào thì lấy các type item shop đó và sinh ra
     {
         switch (itemType)
         {

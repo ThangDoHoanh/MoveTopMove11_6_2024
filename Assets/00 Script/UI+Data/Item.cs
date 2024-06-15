@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ItemTest : ItemIvenBaseTeset
+public class Item : ItemIvenBase
 {
     [SerializeField] Button _BTNbuy;
     
@@ -26,7 +27,7 @@ public class ItemTest : ItemIvenBaseTeset
         _isOwnde.gameObject.SetActive(false);
         if (_BTNbuy != null)
         {
-            _BTNbuy.onClick.AddListener(() =>
+            _BTNbuy.onClick.AddListener(() =>// nó sẽ tự add chính nó để  bắt điều kiện hiện thị button buy or seclect
             {
                 UIManager._instan._imagepick.transform.SetParent(_BTNbuy.transform, false);
                 UIManager._instan._imagepick.gameObject.SetActive(true);
@@ -37,7 +38,7 @@ public class ItemTest : ItemIvenBaseTeset
     
     void checkOwnde ()//kiểm tra xem có đang sở hữu k
     {
-        if (_info._owned == true)
+        if (_info._owned == true)// nếu đang sở hữu thì hiện thị btn Select
         {
             _isOwnde.gameObject.SetActive(true);
             _buy.gameObject.SetActive(false);
@@ -45,24 +46,44 @@ public class ItemTest : ItemIvenBaseTeset
             Debug.Log("123!!");
             if (_isOwnde != null)
             {
-                _isOwnde.onClick.AddListener(() =>
+                _isOwnde.onClick.AddListener(() => // khi đang sở hữu thì add dữ liệu
                 {
-                    ShopManager._instan.ResetActifSetPlay(_info._itemType);
-                    switch (_info._itemType)
+                    // Use the current shop type to determine the action
+                var currentShop = ShopManager._instan.currentShop;
+                if (currentShop == ShopManager.ShopType.None)
+                {
+                    Debug.LogWarning("No shop is currently selected.");
+                    return;
+                }
+
+                // Check the item type and the current shop to perform the appropriate action
+                ShopManager._instan.ResetActifSetPlay(_info._itemType);
+
+                switch (currentShop)// ở shop nào chỉ nhận _info.id và type ở shop đó
                     {
-                        case ItemType.Hair:
+                    case ShopManager.ShopType.Hair:
+                        if (_info._itemType == ItemType.Hair)
+                        {
                             ShopManager._instan.SetItemTest(_info._id, ItemType.Hair);
-                            break;
-                        case ItemType.Spine:
-                            ShopManager._instan.SetItemTest(_info._id, ItemType.Spine);
-                            break;
-                        case ItemType.LeftHand:
-                            ShopManager._instan.SetItemTest(_info._id, ItemType.LeftHand);
-                            break;
-                        case ItemType.Pants:
+                        }
+                       
+                        break;
+                    case ShopManager.ShopType.Pants:
+                        if (_info._itemType == ItemType.Pants)
+                        {
                             ShopManager._instan.SetItemTest(_info._id, ItemType.Pants);
-                            break;
-                        case ItemType.Skin:
+                        }
+                        
+                        break;
+                    case ShopManager.ShopType.LeftHand:
+                        if (_info._itemType == ItemType.LeftHand)
+                        {
+                            ShopManager._instan.SetItemTest(_info._id, ItemType.LeftHand);
+                        }
+                        break;
+                    case ShopManager.ShopType.Skin:
+                        if (_info._itemType == ItemType.Skin)
+                        {
                             ShopManager._instan.SetItemTest(_info._id, ItemType.Skin);
 
                             if (_info._hairSkin != null)
@@ -70,46 +91,37 @@ public class ItemTest : ItemIvenBaseTeset
                                 GameObject SkinhairInstance = ObjectPooling._instan.GetObjectparent(_info._hairSkin, ShopManager._instan._hair.transform);
                                 SkinhairInstance.SetActive(true);
                             }
-                            else
-                            {
-                                Debug.LogWarning("Hair skin prefab is not assigned in ItemDataSO.");
-                            }
-
+                            
                             if (_info._SpineSkin != null)
                             {
                                 GameObject SkinspineInstance = ObjectPooling._instan.GetObjectparent(_info._SpineSkin, ShopManager._instan._spnie.transform);
                                 SkinspineInstance.SetActive(true);
                             }
-                            else
-                            {
-                                Debug.LogWarning("Spine skin prefab is not assigned in ItemDataSO.");
-                            }
-
+                            
                             if (_info._LefpHandSkin != null)
                             {
                                 GameObject SkinleftHandInstance = ObjectPooling._instan.GetObjectparent(_info._LefpHandSkin, ShopManager._instan._lefpHand.transform);
                                 SkinleftHandInstance.SetActive(true);
                             }
-                            else
-                            {
-                                Debug.LogWarning("Left hand skin prefab is not assigned in ItemDataSO.");
-                            }
-
-
-                            break;
-                        default:
-                            Debug.LogWarning("Unknown item type.");
-                            break;
+                           
+                        }
+                       
+                        break;
+                    default:
+                        Debug.LogWarning("Unknown shop type.");
+                        break;
                     }
                 });
             }
 
+
         }
-        else
+        else //nếu không sở hữu thì hiện thị btn Buy
         {
             _buy.gameObject.SetActive(true);
             _isOwnde.gameObject.SetActive(false);
             _conts.text = _info._conts.ToString();
+            _buy.onClick.RemoveAllListeners();
             if (_buy != null)
             {
                 _buy.onClick.AddListener(() =>
@@ -136,9 +148,5 @@ public class ItemTest : ItemIvenBaseTeset
             Debug.Log("bạn nghèo !");
         }
     }    
-
-    void CheckSkin()
-    {
-
-    }    
+  
 }

@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2215338313031389949}
-  m_Layer: 5
+  m_Layer: 15
   m_Name: Khien
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -49,9 +49,9 @@ GameObject:
   - component: {fileID: 3896171320902833550}
   - component: {fileID: 4835158989065651793}
   - component: {fileID: 3577750347381607240}
-  m_Layer: 5
+  m_Layer: 15
   m_Name: BTN_LefpHande
-  m_TagString: Untagged
+  m_TagString: IteamSkin
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -172,11 +172,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _info: {fileID: 11400000, guid: 6bdcd745ffc93ac4f8604a0b4e281c74, type: 2}
   _BTNbuy: {fileID: 4835158989065651793}
-  _imageItem: {fileID: 0}
   _conts: {fileID: 0}
   _select: {fileID: 0}
   _buy: {fileID: 0}
   _isOwnde: {fileID: 0}
+  _Adver: {fileID: 0}
 --- !u!1001 &427773020399051155
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -188,6 +188,10 @@ PrefabInstance:
     - target: {fileID: 1444421447794800552, guid: 8e3dad94d7c91c643844eedf75fac13b, type: 3}
       propertyPath: m_Name
       value: Khien
+      objectReference: {fileID: 0}
+    - target: {fileID: 1444421447794800552, guid: 8e3dad94d7c91c643844eedf75fac13b, type: 3}
+      propertyPath: m_Layer
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 2251884527611014418, guid: 8e3dad94d7c91c643844eedf75fac13b, type: 3}
       propertyPath: m_LocalScale.x

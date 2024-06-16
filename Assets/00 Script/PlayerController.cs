@@ -24,7 +24,7 @@ public class PlayerController : Singleton<PlayerController>
 
     [SerializeField] LayerMask _layerMask;
     public bool chuyenhuong=true;
-
+    public bool _idDead =false;
     public bool _isPause=true;
 
     [SerializeField] GameObject _bulletTrenNguoi;
@@ -107,6 +107,7 @@ public class PlayerController : Singleton<PlayerController>
         for (int i = 0; i < _listEnemyTaget.Count; i++)
         {
             GameObject z = _listEnemyTaget[i];
+
             float distance = Vector3.Distance(z.transform.position, this.transform.position);
 
           
@@ -159,9 +160,6 @@ public class PlayerController : Singleton<PlayerController>
         _animator.SetTrigger(CONSTANT.ATK);
 
         countDownAtk = _countDownAtkPlayer;
-
-        //chuyenHuongTarget();
-
     }
     void playerATK()
     {
@@ -177,10 +175,6 @@ public class PlayerController : Singleton<PlayerController>
         bulletPlayer.SetActive(true);
         
     }
-    public void chuyenHuongTarget()
-    {
-        StartCoroutine(resetChuyenHuong());
-    }    
     public void hoaTo()
     {
         transform.position += new Vector3(0, 0.05f, 0);
@@ -215,17 +209,88 @@ public class PlayerController : Singleton<PlayerController>
         _AimSpriteRenderer.transform.localPosition = _Target.transform.position;
         _AimSpriteRenderer.SetActive(true);
     }
-    IEnumerator resetChuyenHuong()
-    {
-       
-        yield return new WaitForSeconds(4f);
-        chuyenhuong = true;
-        _bulletTrenNguoi.SetActive(true);
-        
-    }
+    
     public void SetMapSkin(bool _setAnim)
     {
         _animator.SetBool(CONSTANT.DANCE, _setAnim);
+    }
+
+     public void PlayerDead()//khi play dính đạn của enemy
+        {
+            Renderer renderer = this.GetComponent<Renderer>();
+            if (renderer != null)
+            {
+                renderer.enabled = false; // Disable the renderer
+            }
+            _idDead = true;
+            _animator.SetTrigger(CONSTANT.DEAD);
+             UIManager._instan.panelReviveNow();
+
+      }    
+     void PlayerDeading()
+     {
+        
+     }
+    public void continuePlay()
+    {
+        _animator.SetTrigger(CONSTANT.IDLE);
+
+        // Tìm vị trí an toàn trên nền tảng
+        Vector3 safePosition = GetSafePositionOnPlatform();
+
+        // Đặt người chơi tại vị trí đó
+        this.transform.position = safePosition;
+
+        _Target = null;
+
+        // Khôi phục các trạng thái cần thiết
+        _idDead = false;
+        _isPause = false;
+
+        // Bật lại renderer nếu nó bị tắt khi người chơi chết
+        Renderer renderer = this.GetComponent<Renderer>();
+        if (renderer != null)
+        {
+            renderer.enabled = true;
+        }
+    }
+
+    private Vector3 GetSafePositionOnPlatform()
+    {
+        // Kích thước nền tảng
+        Vector3 platformSize = GameManager._instan.platformCollider.bounds.size;
+
+        Vector3 playerPosition = new Vector3(0,1,0);
+        float minSafeDistance = attackRange; // Khoảng cách an toàn tối thiểu từ enemy
+
+        // Lặp lại cho đến khi tìm được một vị trí an toàn
+        bool isSafe;
+        do
+        {
+            // Tạo vị trí ngẫu nhiên trong phạm vi nền tảng
+            playerPosition.x = Random.Range(-platformSize.x / 2, platformSize.x / 2);
+            playerPosition.z = Random.Range(-platformSize.z / 2, platformSize.z / 2);
+            playerPosition.y = GameManager._instan.platformCollider.bounds.center.y;
+
+            isSafe = true;
+
+            // Kiểm tra khoảng cách đến tất cả các enemy
+            foreach (GameObject enemy in GameManager._instan._listTarget)
+            {
+                if (enemy.activeSelf)
+                {
+                    float distanceToEnemy = Vector3.Distance(playerPosition, enemy.transform.position);
+                    if (distanceToEnemy < minSafeDistance)
+                    {
+                        isSafe = false;
+                        break;
+                    }
+                }
+            }
+
+        } while (!isSafe);
+
+        return playerPosition;
     }
 
 }

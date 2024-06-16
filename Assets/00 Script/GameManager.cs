@@ -10,7 +10,7 @@ public class GameManager : Singleton<GameManager>
 {
     //[SerializeField] EnemyController _prefabEnemy;
     public CameraPlayer _cameraPlayer;
-    [SerializeField] EnemyTest _prefabEnemyTest;
+    [SerializeField] EnemyController _prefabEnemyTest;
     [SerializeField] GameObject _gobjPlayer;
     public Transform _Player;
     public Collider platformCollider;
@@ -32,11 +32,14 @@ public class GameManager : Singleton<GameManager>
     public List<GameObject> _spnieAvataPlayer = new List<GameObject>();
     public List<GameObject> _lefpHandAvataPlayer = new List<GameObject>();
     [Header("----Conts-----")]
-    public int _contsPlayer;
-   
+    public int _addingMoney;
+
+
 
     private void Start()
     {
+        _addingMoney = 0;
+        
         _listTarget.Add(_gobjPlayer);
 
         _cameraPlayer.enabled = false;
@@ -118,4 +121,9 @@ public class GameManager : Singleton<GameManager>
 
         }
     }
+
+    public void AddMoney(int _int)
+    {
+        _addingMoney += _int*100;
+    }    
 }

@@ -15,7 +15,7 @@ MonoBehaviour:
   _id: 0
   _name: arrow
   _conts: 200
-  _owned: 1
+  _owned: 0
   _itemType: 0
   _hairSkin: {fileID: 0}
   _LefpHandSkin: {fileID: 0}

@@ -76,6 +76,8 @@ public class BulletEnemyController : MonoBehaviour
     {
         if (other.gameObject.CompareTag(CONSTANT.PLAYER))
         {
+            PlayerController._instan.PlayerDead();
+           
             Debug.Log("ga!!!");
             this.gameObject.SetActive(false);
         }
@@ -94,7 +96,7 @@ public class BulletEnemyController : MonoBehaviour
         {
             other.gameObject.GetComponent<Animator>().SetTrigger(CONSTANT.DEAD);
 
-            other.gameObject.GetComponent<EnemyTest>().dangchet = true;
+            //other.gameObject.GetComponent<EnemyController>()._isDaed = true;
 
             UIManager._instan.setLive(1);
             //UiManager._instan.setLive(1);
@@ -103,5 +105,6 @@ public class BulletEnemyController : MonoBehaviour
             Debug.Log("-1!!");
             this.gameObject.SetActive(false);
         }
+        
     }
 }

@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9182400665155515520}
-  m_Layer: 5
+  m_Layer: 15
   m_Name: Crown
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -48,7 +48,7 @@ GameObject:
   - component: {fileID: 3671448511428973778}
   - component: {fileID: 7210724084644216956}
   - component: {fileID: 8689946221538592009}
-  m_Layer: 5
+  m_Layer: 15
   m_Name: Text (Legacy)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -143,9 +143,9 @@ GameObject:
   - component: {fileID: 4524583882575383372}
   - component: {fileID: 3857060618762873948}
   - component: {fileID: 1209995060976859686}
-  m_Layer: 5
+  m_Layer: 15
   m_Name: BTN_Hair_2
-  m_TagString: Untagged
+  m_TagString: IteamSkin
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -271,6 +271,7 @@ MonoBehaviour:
   _select: {fileID: 0}
   _buy: {fileID: 0}
   _isOwnde: {fileID: 0}
+  _Adver: {fileID: 0}
 --- !u!1001 &5230272811312023098
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -282,6 +283,14 @@ PrefabInstance:
     - target: {fileID: 2633509939112300063, guid: 038235d7f6c0d354f962b4f1e8f62135, type: 3}
       propertyPath: m_Name
       value: Crown
+      objectReference: {fileID: 0}
+    - target: {fileID: 2633509939112300063, guid: 038235d7f6c0d354f962b4f1e8f62135, type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 3326743102839874352, guid: 038235d7f6c0d354f962b4f1e8f62135, type: 3}
+      propertyPath: m_Layer
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 3442944717628609701, guid: 038235d7f6c0d354f962b4f1e8f62135, type: 3}
       propertyPath: m_LocalPosition.x
@@ -322,6 +331,10 @@ PrefabInstance:
     - target: {fileID: 3442944717628609701, guid: 038235d7f6c0d354f962b4f1e8f62135, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8676421308184256145, guid: 038235d7f6c0d354f962b4f1e8f62135, type: 3}
+      propertyPath: m_Layer
+      value: 15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

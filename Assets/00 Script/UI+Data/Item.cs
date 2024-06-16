@@ -14,12 +14,13 @@ public class Item : ItemIvenBase
     [SerializeField] Text _select;
     [SerializeField] Button _buy;
     [SerializeField] Button _isOwnde;
+    [SerializeField] Button _Adver;
 
 
-    private void Awake()
+    private void Start()
     {
-       
-        _buy = UIManager._instan._btnBuy;
+        _Adver = UIManager._instan._btnAdvertisement;
+         _buy = UIManager._instan._btnBuy;
         _isOwnde = UIManager._instan._btnOwnde;
         _conts = UIManager._instan._txtconts;
         _select = UIManager._instan._txtselect;
@@ -40,6 +41,7 @@ public class Item : ItemIvenBase
     {
         if (_info._owned == true)// nếu đang sở hữu thì hiện thị btn Select
         {
+            _Adver.gameObject.SetActive(false);
             _isOwnde.gameObject.SetActive(true);
             _buy.gameObject.SetActive(false);
             _select.text = "Select";
@@ -64,6 +66,7 @@ public class Item : ItemIvenBase
                     case ShopManager.ShopType.Hair:
                         if (_info._itemType == ItemType.Hair)
                         {
+                            ShopManager._instan.ResetSkin();
                             ShopManager._instan.SetItemTest(_info._id, ItemType.Hair);
                         }
                        
@@ -71,20 +74,23 @@ public class Item : ItemIvenBase
                     case ShopManager.ShopType.Pants:
                         if (_info._itemType == ItemType.Pants)
                         {
-                            ShopManager._instan.SetItemTest(_info._id, ItemType.Pants);
+                                ShopManager._instan.ResetSkin();
+                                ShopManager._instan.SetItemTest(_info._id, ItemType.Pants);
                         }
                         
                         break;
                     case ShopManager.ShopType.LeftHand:
                         if (_info._itemType == ItemType.LeftHand)
                         {
-                            ShopManager._instan.SetItemTest(_info._id, ItemType.LeftHand);
+                                ShopManager._instan.ResetSkin();
+                                ShopManager._instan.SetItemTest(_info._id, ItemType.LeftHand);
                         }
                         break;
                     case ShopManager.ShopType.Skin:
                         if (_info._itemType == ItemType.Skin)
                         {
-                            ShopManager._instan.SetItemTest(_info._id, ItemType.Skin);
+                                
+                                ShopManager._instan.SetItemTest(_info._id, ItemType.Skin);
 
                             if (_info._hairSkin != null)
                             {
@@ -119,9 +125,11 @@ public class Item : ItemIvenBase
         else //nếu không sở hữu thì hiện thị btn Buy
         {
             _buy.gameObject.SetActive(true);
+            _Adver.gameObject.SetActive(true);
             _isOwnde.gameObject.SetActive(false);
             _conts.text = _info._conts.ToString();
             _buy.onClick.RemoveAllListeners();
+
             if (_buy != null)
             {
                 _buy.onClick.AddListener(() =>
@@ -129,17 +137,27 @@ public class Item : ItemIvenBase
                     OnPurchase();
                 });
             }
+            //if (_Adver != null)
+            //{
+            //    _Adver.onClick.AddListener(() =>
+            //    {
+            //        // chạy quảng cáo
+            //    });
+            //}
         }
     }   
+
+   
     void OnPurchase()//kiểm tra xem đủ conts đề mua k
     {
-        int playerMoney = GameManager._instan._contsPlayer;
+        int playerMoney = PlayerPrefs.GetInt("ContsPlayer");
         if (playerMoney >= _info._conts)
         {
             // Người chơi đủ tiền để mua
-            GameManager._instan._contsPlayer -= _info._conts; // Trừ tiền
+            playerMoney -= _info._conts; // Trừ tiền
             _info._owned = true; // Đánh dấu là đã sở hữu
             checkOwnde(); // Cập nhật giao diện
+            PlayerPrefs.SetInt("ContsPlayer", playerMoney);
             Debug.Log("Item purchased successfully!");
         }
         else

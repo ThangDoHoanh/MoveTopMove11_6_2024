@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9182400665155515520}
-  m_Layer: 5
+  m_Layer: 15
   m_Name: Cowboy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -48,7 +48,7 @@ GameObject:
   - component: {fileID: 3671448511428973778}
   - component: {fileID: 7210724084644216956}
   - component: {fileID: 8689946221538592009}
-  m_Layer: 5
+  m_Layer: 15
   m_Name: Text (Legacy)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -143,9 +143,9 @@ GameObject:
   - component: {fileID: 4524583882575383372}
   - component: {fileID: 3857060618762873948}
   - component: {fileID: 1209995060976859686}
-  m_Layer: 5
+  m_Layer: 15
   m_Name: BTN_Hair_1
-  m_TagString: Untagged
+  m_TagString: IteamSkin
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -271,6 +271,7 @@ MonoBehaviour:
   _select: {fileID: 0}
   _buy: {fileID: 0}
   _isOwnde: {fileID: 0}
+  _Adver: {fileID: 0}
 --- !u!1001 &1279652559365849394
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -282,6 +283,10 @@ PrefabInstance:
     - target: {fileID: 123022535898440260, guid: f3f41071679e99a4097c69cb5fe3e2e2, type: 3}
       propertyPath: m_Name
       value: Cowboy
+      objectReference: {fileID: 0}
+    - target: {fileID: 123022535898440260, guid: f3f41071679e99a4097c69cb5fe3e2e2, type: 3}
+      propertyPath: m_Layer
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 792282741573449982, guid: f3f41071679e99a4097c69cb5fe3e2e2, type: 3}
       propertyPath: m_LocalPosition.x

@@ -1,19 +1,24 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class ButtonController : MonoBehaviour
 {
     [SerializeField] Button _BTLPlay;
-    [SerializeField] Button _BTLPlayAvatar1;
-    [SerializeField] Button _BTLPlayAvatar2;
     [SerializeField] Button _BTLSkin;
     [SerializeField] Button _BTLBackHome;
+    [Header("---------Shop-----")]
+    [SerializeField] Button _BTNShopWeapon;
+    [SerializeField] Button _BTNShopWeaponBack;
     [SerializeField] Button _BTLShopHair;
     [SerializeField] Button _BTLShopPants;
     [SerializeField] Button _BTLShopLefpHande;
     [SerializeField] Button _BTLShopSkin;
+    [SerializeField] Button _BTLSetting;
+    [SerializeField] Button _BTNHome;
+    [SerializeField] Button _BTNContinue;
 
     // Start is called before the first frame update
     private void Awake()
@@ -34,7 +39,9 @@ public class ButtonController : MonoBehaviour
         {
             _BTLSkin.onClick.AddListener(() =>
             {
-                ShopManager._instan._listImageBTNShop[0].color= Color.red;
+               
+                ShopManager._instan.resetBTN();
+                ShopManager._instan._listImageBTNShop[0].color= Color.red;// đổi màu đỏ cho button
                 UIManager._instan._canvaSkin.gameObject.SetActive(true);
                 UIManager._instan._canvaMapHome.gameObject.SetActive(false);
                 PlayerController._instan.SetMapSkin(true);
@@ -48,7 +55,7 @@ public class ButtonController : MonoBehaviour
                 PlayerController._instan.SetMapSkin(false);
                 UIManager._instan._canvaSkin.gameObject.SetActive(false);
                 UIManager._instan._canvaMapHome.gameObject.SetActive(true);
-
+                UIManager._instan._textCoinPlayerPrefs.text = PlayerPrefs.GetInt("ContsPlayer").ToString();
             });
         }
         
@@ -56,7 +63,7 @@ public class ButtonController : MonoBehaviour
         {
             _BTLShopHair.onClick.AddListener(() =>
             {
-               ShopManager._instan.resetBTN();
+                ShopManager._instan.resetBTN();
                 ShopManager._instan.setShopHair();
             });
         }
@@ -83,6 +90,53 @@ public class ButtonController : MonoBehaviour
             {
                 ShopManager._instan.resetBTN();
                 ShopManager._instan.setShopSkin();
+
+            });
+        }
+        if (_BTLSetting != null)
+        {
+            _BTLSetting.onClick.AddListener(() =>
+            {   PlayerController._instan._isPause = true;
+                UIManager._instan._panelSetting.SetActive(true);
+                UIManager._instan._panelPlaying.SetActive(false);
+
+            });
+        }
+        if (_BTNHome != null)
+        {
+            _BTNHome.onClick.AddListener(() =>
+            {
+                SceneManager.LoadScene("SampleScene");
+
+            });
+        }
+        if (_BTNContinue != null)
+        {
+            _BTNContinue.onClick.AddListener(() =>
+            {
+                PlayerController._instan._isPause = false;
+                UIManager._instan._panelSetting.SetActive(false);
+                UIManager._instan._panelPlaying.SetActive(true);
+
+            });
+        }
+        if (_BTNShopWeapon != null)
+        {
+            _BTNShopWeapon.onClick.AddListener(() =>
+            {
+                UIManager._instan._canvaShopWeapon.gameObject.SetActive(true);
+                UIManager._instan._canvaMapHome.gameObject.SetActive(false);
+                
+
+            });
+        }
+        if (_BTNShopWeaponBack != null)
+        {
+            _BTNShopWeaponBack.onClick.AddListener(() =>
+            {
+                UIManager._instan._canvaShopWeapon.gameObject.SetActive(false);
+                UIManager._instan._canvaMapHome.gameObject.SetActive(true);
+
 
             });
         }

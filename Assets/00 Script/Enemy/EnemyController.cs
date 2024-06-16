@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
 
-public class EnemyTest : MonoBehaviour
+public class EnemyController : MonoBehaviour
 {
     [SerializeField] float _speedMove, attackRange, _countDownAtkEnemy, _timeMove;
 
@@ -29,9 +29,13 @@ public class EnemyTest : MonoBehaviour
     List<Material> _skinEnemy = new List<Material>();
     [SerializeField] SkinnedMeshRenderer _skinnedEnemy;
 
+    public bool HasCollided { get; private set; } = false;
+
+    public bool _isDaed = false;
     // Start is called before the first frame update
     private void OnEnable()
     {
+        _isDaed = false;
         _skinnedEnemy.material = _skinEnemy[UnityEngine.Random.Range(0, 5)];
         _skinnedPant.material = _PantEnemy[UnityEngine.Random.Range(0,7)];
         if (dangchet == true)
@@ -70,29 +74,23 @@ public class EnemyTest : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+
+    private void FixedUpdate()
     {
-        if(chuyenhuong == true)
+        if (chuyenhuong == true)
         {
             Testdistance();
         }
-        if(dangchet==false)
+        if (dangchet == false)
         {
             EnemyMove();
         }
-        
-       
-        if(_target !=null)
-        {
-            //if (_target.gameObject.activeSelf)
-            //{
-            //    _listTaget.Remove(_target);
-            //    _target = null;
-            //}
 
+
+        if (_target != null)
+        {
             animoEnemyATk();
         }
-        
     }
     
    
@@ -103,58 +101,23 @@ public class EnemyTest : MonoBehaviour
         {
             GameObject z = _listTaget[i];
             float distance = Vector3.Distance(z.transform.position, this.transform.position);
-            //if (distance < attackRange && distance!=0)
-            //{
-            //    _isMoving = false; // Dừng di chuyển
-            //    _timeMove = 2f;
 
-            //    _target = z.transform;
-            //    break; // Thoát khỏi vòng lặp sau khi tìm thấy mục phù hợp
-            //}
-            
-            if (z.gameObject.activeSelf == true)
+            if (z.activeSelf && distance < attackRange && distance != 0)
             {
-                if (distance < attackRange && distance != 0)
+                if (!PlayerController._instan._idDead || z != PlayerController._instan.gameObject)
                 {
-                  
                     _isMoving = false; // Dừng di chuyển
                     _timeMove = 2f;
+
                     _target = z.transform;
                     break; // Thoát khỏi vòng lặp sau khi tìm thấy mục phù hợp
                 }
-
-                //break; // Thoát khỏi vòng lặp sau khi tìm thấy mục phù hợp
             }
             else
             {
                 _target = null;
             }
         }
-
-
-
-        //_listTaget = GameManager._instan.GetItems(this.transform);
-        //if (_listTaget == null)
-        //    return;
-        //for (int i = 0; i < _listTaget.Count; i++)
-        //{
-        //    Transform z = _listTaget[i];
-        //    float distance = Vector3.Distance(z.transform.position, _enemy.transform.position);
-        //    if (distance < attackRange)
-        //    {
-        //        _isMoving = false; // Dừng di chuyển
-        //        _timeMove = 2f;
-        //        _listTaget.RemoveAt(i);
-        //        _target = z.transform;
-        //        break; // Thoát khỏi vòng lặp sau khi tìm thấy mục phù hợp
-        //    }
-        //    else
-        //    {
-        //        _target = null;
-        //    }    
-        //}
-
-
     }
 
 
@@ -168,10 +131,11 @@ public class EnemyTest : MonoBehaviour
                 _isMoving = true; // Bắt đầu di chuyển
                 _stopTime = 2f; // Reset lại thời gian đứng yên
                 GenerateMovementVector(); // Tạo vector di chuyển mới
-                chuyenhuong = true;
+                
             }
             else
             {
+                chuyenhuong = true;
                 quayhuongEnemy();
                 _animatorEnemy.SetBool(CONSTANT.RUN, false);
             }
@@ -232,7 +196,7 @@ public class EnemyTest : MonoBehaviour
 
     }
     
-    void enemyATK()
+    void enemyATK()// được gọi ở giữa animo atk để sinh ra bullet
     {   _target = null;
         GameObject bulletEnemy = ObjectPooling._instan.GetObject(_bulletPrefab.gameObject);
         bulletEnemy.transform.position = _diemban.transform.position;
@@ -241,22 +205,21 @@ public class EnemyTest : MonoBehaviour
         bulletEnemy.SetActive(true);
         _animatorEnemy.SetBool(CONSTANT.ATK, false);
 
-        StartCoroutine(resetChuyenHuong());
-        //GameObject bulletEnemy = ObjectPooling._instan.GetObject(_bulletPrefab.gameObject);
-        //Vector3 bulletPosition = this.transform.position + this.transform.forward * this.transform.localScale.z + new Vector3(0, 1, 0);
-
-
-        //bulletEnemy.transform.position = bulletPosition;
-        //bulletEnemy.transform.rotation = this.transform.rotation;
-
-        //bulletEnemy.SetActive(true);
-        //_animatorEnemy.SetBool(CONSTANT.ATK, false);
-
+        _isMoving = true; // Bắt đầu di chuyển
+        _stopTime = 2f; // Reset lại thời gian đứng yên
+        GenerateMovementVector(); // Tạo vector di chuyển mới
+        chuyenhuong = false;
+        //StartCoroutine(resetChuyenHuong());
     }
 
    
     void Deading() //KHi enemy đang chết bời player giết
     {
+        Renderer renderer = this.GetComponent<Renderer>();
+        if (renderer != null)
+        {
+            renderer.enabled = false; // Disable the renderer
+        }
         PlayerController._instan.chuyenhuong = false;
         _capsuleCollider.enabled = false;
         _isMoving = false; // Dừng di chuyển
@@ -270,11 +233,11 @@ public class EnemyTest : MonoBehaviour
     }
 
   
-    IEnumerator resetChuyenHuong()
-    {
-        yield return new WaitForSeconds(3f);
-        chuyenhuong = true;
-    }
+    //IEnumerator resetChuyenHuong()
+    //{
+    //    yield return new WaitForSeconds(3f);
+    //    chuyenhuong = true;
+    //}
 
     private void OnTriggerEnter(Collider other)
     {
@@ -282,7 +245,6 @@ public class EnemyTest : MonoBehaviour
         {
             _animatorEnemy.SetTrigger(CONSTANT.DEAD);
             dangchet = true;
-            
         }
        
 

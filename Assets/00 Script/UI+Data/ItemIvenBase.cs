@@ -6,6 +6,4 @@ public abstract class ItemIvenBase : MonoBehaviour
 {
     [SerializeField]
     public ITemDataSO _info;
-   
-
 }

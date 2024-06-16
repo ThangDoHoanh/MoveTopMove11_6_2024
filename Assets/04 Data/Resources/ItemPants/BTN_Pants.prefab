@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 1949004361649164867}
   - component: {fileID: 7260385121446603390}
   - component: {fileID: 8766061170730008653}
-  m_Layer: 5
+  m_Layer: 15
   m_Name: BTN_Pants
-  m_TagString: Untagged
+  m_TagString: IteamSkin
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -58,6 +58,7 @@ MonoBehaviour:
   _select: {fileID: 0}
   _buy: {fileID: 0}
   _isOwnde: {fileID: 0}
+  _Adver: {fileID: 0}
 --- !u!222 &1949004361649164867
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -151,7 +152,7 @@ GameObject:
   - component: {fileID: 2309366081374146347}
   - component: {fileID: 784042317852942072}
   - component: {fileID: 4654082621104545106}
-  m_Layer: 5
+  m_Layer: 15
   m_Name: Chambi
   m_TagString: Untagged
   m_Icon: {fileID: 0}

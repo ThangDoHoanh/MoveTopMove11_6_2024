@@ -22,8 +22,8 @@ public class ShopManager : Singleton<ShopManager>
     public GameObject _hair;
     public GameObject _spnie;
     public GameObject _lefpHand;
-    [SerializeField] SkinnedMeshRenderer _skinnedPlayer;
-    [SerializeField] SkinnedMeshRenderer _pantsPlayer;
+    public SkinnedMeshRenderer _skinnedPlayer;
+    public SkinnedMeshRenderer _pantsPlayer;
     [SerializeField] GameObject _panelShop;
 
     public List<Image> _listImageBTNShop = new List<Image>();
@@ -96,6 +96,24 @@ public class ShopManager : Singleton<ShopManager>
                 Debug.LogWarning("Unknown or irrelevant item type for the current shop.");
                 break;
         }
+    }
+    public void ResetSkin()
+    {
+        foreach (Transform child in _hair.transform)
+        {
+            child.gameObject.SetActive(false);
+        }
+
+        foreach (Transform child in _lefpHand.transform)
+        {
+            child.gameObject.SetActive(false);
+        }
+        foreach (Transform child in _spnie.transform)
+        {
+            child.gameObject.SetActive(false);
+        }
+        _skinnedPlayer.material = GameManager._instan._materialAvataPlayer[3];
+        _pantsPlayer.material = null;
     }
 
     public void resetBTN()// mỗi lần  uesr ấn chuyển shop thì reset lại btn

@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 4190462594678476326}
   - component: {fileID: 3609142025526798558}
   - component: {fileID: 5857197448945776765}
-  m_Layer: 5
+  m_Layer: 15
   m_Name: BTN_Set_0
-  m_TagString: Untagged
+  m_TagString: IteamSkin
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -66,6 +66,7 @@ MonoBehaviour:
   _select: {fileID: 0}
   _buy: {fileID: 0}
   _isOwnde: {fileID: 0}
+  _Adver: {fileID: 0}
 --- !u!114 &3609142025526798558
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -151,7 +152,7 @@ GameObject:
   - component: {fileID: 2141293087611465493}
   - component: {fileID: 63326266678353508}
   - component: {fileID: 5221026324762246619}
-  m_Layer: 5
+  m_Layer: 15
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}

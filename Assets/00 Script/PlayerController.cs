@@ -33,7 +33,9 @@ public class PlayerController : Singleton<PlayerController>
     [SerializeField] GameObject _spnie;
     [SerializeField] GameObject _lefpHand;
     [SerializeField] SkinnedMeshRenderer _skinnedPlayer;
+    public DataPlayer _dataSOPlayer;
 
+    public int _idHair;
     public void OnMove(InputAction.CallbackContext context)
     {
         _move = context.ReadValue<Vector2>();
@@ -228,10 +230,7 @@ public class PlayerController : Singleton<PlayerController>
              UIManager._instan.panelReviveNow();
 
       }    
-     void PlayerDeading()
-     {
-        
-     }
+    
     public void continuePlay()
     {
         _animator.SetTrigger(CONSTANT.IDLE);
@@ -293,5 +292,51 @@ public class PlayerController : Singleton<PlayerController>
 
         return playerPosition;
     }
+    public void SetDataPlayer()
+    {
+        foreach (Transform _cloneHair in ShopManager._instan._hair.transform)
+        {
+            if (_cloneHair.gameObject.activeSelf == true)
+            {
+
+                _dataSOPlayer._info._hairSkin = null;
+                _dataSOPlayer._info._hairSkin = GameManager._instan._testHair[_idHair];
+            }
+        }
+        foreach (Transform _cloneSpnie in ShopManager._instan._spnie.transform)
+        {
+            if (_cloneSpnie.gameObject.activeSelf == true)
+            {
+                _dataSOPlayer._info._SpineSkin = null;
+                _dataSOPlayer._info._SpineSkin = _cloneSpnie.gameObject;
+            }
+        }
+        foreach (Transform _cloneLefpHand in ShopManager._instan._lefpHand.transform)
+        {
+            if (_cloneLefpHand.gameObject.activeSelf == true)
+            {
+                _dataSOPlayer._info._LefpHandSkin = null;
+                _dataSOPlayer._info._LefpHandSkin = _cloneLefpHand.gameObject;
+            }
+        }
+        foreach (Transform _clonePants in ShopManager._instan._pantsPlayer.transform)
+        {
+            if (_clonePants.gameObject.activeSelf == true)
+            {
+                _dataSOPlayer._info._pantSkin = null;
+                _dataSOPlayer._info._pantSkin = _clonePants.gameObject.GetComponent<SkinnedMeshRenderer>().material;
+            }
+        }
+        foreach (Transform _cloneSkin in ShopManager._instan._skinnedPlayer.transform)
+        {
+            if (_cloneSkin.gameObject.activeSelf == true)
+            {
+                _dataSOPlayer._info._materialSkin = null;
+                _dataSOPlayer._info._materialSkin = _cloneSkin.gameObject.GetComponent<SkinnedMeshRenderer>().material;
+            };
+
+        }
+    }
+
 
 }

@@ -4651,6 +4651,11 @@ MonoBehaviour:
   - {fileID: 1239407030522431728, guid: f118959b6f2692740bd674cb1498a683, type: 3}
   _lefpHandAvataPlayer: []
   _weapon: []
+  _testHair:
+  - {fileID: 7657608564771745560, guid: 7a6945a7389d09545b6495eae2ccf891, type: 3}
+  - {fileID: 3141354493572486197, guid: de90ad0221beb1e428d0ba5d37ddb693, type: 3}
+  - {fileID: 3465740776191584730, guid: 0e56ef48bd679334299b2c2cfcdea112, type: 3}
+  - {fileID: 8237010893780385183, guid: b4bc655774954a94b936b74604f861e1, type: 3}
   _addingMoney: 0
 --- !u!114 &799630769
 MonoBehaviour:
@@ -10749,7 +10754,7 @@ PrefabInstance:
     - target: {fileID: -529177695146175607, guid: 38f9296dc39c27647a0119314baf12a2, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2100000, guid: 999eac2b8c75db6449122b1854fd1fc4, type: 2}
     - target: {fileID: -529177695146175607, guid: 38f9296dc39c27647a0119314baf12a2, type: 3}
       propertyPath: m_Materials.Array.data[1]
       value: 
@@ -13927,6 +13932,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2004495310}
+  - component: {fileID: 2004495312}
   - component: {fileID: 2004495311}
   - component: {fileID: 2004495307}
   - component: {fileID: 2004495305}
@@ -14125,6 +14131,20 @@ MonoBehaviour:
   _spnie: {fileID: 2126172954}
   _lefpHand: {fileID: 1583880602}
   _skinnedPlayer: {fileID: 763769608}
+  _dataSOPlayer: {fileID: 2004495312}
+--- !u!114 &2004495312
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2004495301}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff23b068a08904449b2090c0e12e5de5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _info: {fileID: 11400000, guid: 14f0899f5d1dbbe41bc4aad8de155c90, type: 2}
 --- !u!1 &2056812485
 GameObject:
   m_ObjectHideFlags: 0

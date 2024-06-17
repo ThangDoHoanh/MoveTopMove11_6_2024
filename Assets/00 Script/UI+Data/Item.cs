@@ -68,8 +68,9 @@ public class Item : ItemIvenBase
                         {
                             ShopManager._instan.ResetSkin();
                             ShopManager._instan.SetItem(_info._id, ItemType.Hair);
+                            PlayerController._instan._idHair= _info._id;
                         }
-                       
+                            
                         break;
                     case ShopManager.ShopType.Pants:
                         if (_info._itemType == ItemType.Pants)
@@ -77,15 +78,16 @@ public class Item : ItemIvenBase
                                 ShopManager._instan.ResetSkin();
                                 ShopManager._instan.SetItem(_info._id, ItemType.Pants);
                         }
-                        
-                        break;
+                            
+                            break;
                     case ShopManager.ShopType.LeftHand:
                         if (_info._itemType == ItemType.LeftHand)
                         {
                                 ShopManager._instan.ResetSkin();
                                 ShopManager._instan.SetItem(_info._id, ItemType.LeftHand);
                         }
-                        break;
+                            
+                            break;
                     case ShopManager.ShopType.Skin:
                         if (_info._itemType == ItemType.Skin)
                         {
@@ -114,16 +116,14 @@ public class Item : ItemIvenBase
                                     ShopManager._instan._pantsPlayer.material = _info._pantSkin;
 
                             }
-
-
-
-                            }
-                       
-                        break;
+                        }
+                            
+                            break;
                     default:
                         Debug.LogWarning("Unknown shop type.");
                         break;
                     }
+                    PlayerController._instan.SetDataPlayer();
                 });
             }
 
@@ -172,6 +172,8 @@ public class Item : ItemIvenBase
             // Người chơi không đủ tiền để mua
             Debug.Log("bạn nghèo !");
         }
-    }    
-  
+    }
+    
+    
+
 }

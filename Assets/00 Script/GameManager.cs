@@ -32,6 +32,7 @@ public class GameManager : Singleton<GameManager>
     public List<GameObject> _spnieAvataPlayer = new List<GameObject>();
     public List<GameObject> _lefpHandAvataPlayer = new List<GameObject>();
     public List<GameObject> _weapon = new List<GameObject>();
+    public List<GameObject> _testHair = new List<GameObject>();
 
     [Header("----Conts-----")]
     public int _addingMoney;
@@ -70,20 +71,7 @@ public class GameManager : Singleton<GameManager>
             eneymy.SetActive(true);
             _enemyCount++;
 
-        //}
-
-        //if (_enemyCount < _live)
-        //{
-        //    Vector3 randomPosition = GetRandomPositionOnPlatform();
-        //    GameObject eneymy = ObjectPooling._instan.GetObject(_prefabEnemyTest.gameObject);
-
-        //    eneymy.transform.position = randomPosition;
-        //    eneymy.transform.localScale = PlayerTest._instan._scalePlayer.localScale;
-
-        //    eneymy.SetActive(true);
-        //    _enemyCount++;
-
-        //}
+        
 
     }
 
@@ -128,4 +116,5 @@ public class GameManager : Singleton<GameManager>
     {
         _addingMoney += _int*100;
     }    
+
 }

@@ -31,6 +31,8 @@ public class GameManager : Singleton<GameManager>
     public List<Material> _PantsPlayer = new List<Material>();
     public List<GameObject> _spnieAvataPlayer = new List<GameObject>();
     public List<GameObject> _lefpHandAvataPlayer = new List<GameObject>();
+    public List<GameObject> _weapon = new List<GameObject>();
+
     [Header("----Conts-----")]
     public int _addingMoney;
 
@@ -46,7 +48,7 @@ public class GameManager : Singleton<GameManager>
         
         _hairAvataPlayer = Resources.LoadAll<GameObject>("prefabBodyHair").ToList();
         _lefpHandAvataPlayer = Resources.LoadAll<GameObject>("prefabBodyLefhand").ToList();
-        
+        _weapon = Resources.LoadAll<GameObject>("prefabBodyWeapon").ToList();
         _PantsPlayer = Resources.LoadAll<Material>("prefabBodyPants").ToList();
     }
     

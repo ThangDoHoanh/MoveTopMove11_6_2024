@@ -26,8 +26,9 @@ public class PlayerController : Singleton<PlayerController>
     public bool chuyenhuong=true;
     public bool _idDead =false;
     public bool _isPause=true;
-
-    [SerializeField] GameObject _bulletTrenNguoi;
+    
+    public GameObject _bulletTrenNguoi;
+    [Header("-----body-----")]
     [SerializeField] GameObject _hair;
     [SerializeField] GameObject _spnie;
     [SerializeField] GameObject _lefpHand;
@@ -204,7 +205,7 @@ public class PlayerController : Singleton<PlayerController>
         // Đặt scale cho vòng tròn sprite
         _spriteRenderer.transform.localScale = new Vector3(scaleFactor, scaleFactor, 1);
     }
-    void addAnim()
+    void addAnim()// bật tắt aimo enemy
     {
         _AimSpriteRenderer.transform.localPosition = _Target.transform.position;
         _AimSpriteRenderer.SetActive(true);

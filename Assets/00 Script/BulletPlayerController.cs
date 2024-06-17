@@ -14,18 +14,6 @@ public class BulletPlayerController : MonoBehaviour
     void Start()
     {
 
-        //if(PlayerTest._instan._Target.position - transform.position==null)
-        //{
-        //    _rigiBullet.velocity = transform.forward * _speed;
-        //}
-        //else
-        //{
-        //    Vector3 direction = (PlayerTest._instan._Target.position - transform.position).normalized;
-
-        //    _rigiBullet.velocity = direction * _speed;
-        //}
-
-        // Đặt vận tốc của đạn theo hướng tới mục tiêu với tốc độ _speed
         _rigiBullet.velocity = transform.forward * _speed;
 
     }
@@ -37,13 +25,7 @@ public class BulletPlayerController : MonoBehaviour
         {
             _rigiBullet.velocity = transform.forward * _speed;
         }
-        //StartCoroutine(DeactiveAfterTime());
-        //if (_rigiBullet != null)
-        //{
-        //    Vector3 direction = (PlayerTest._instan._Target.position - transform.position).normalized;
-
-        //    _rigiBullet.velocity = direction * _speed;
-        //}
+        
     }
     // Start is called before the first frame update
     private void OnDisable()
@@ -53,7 +35,7 @@ public class BulletPlayerController : MonoBehaviour
             StopCoroutine(_coroutine);
             _coroutine = null;
         }
-
+        PlayerController._instan._bulletTrenNguoi.SetActive(true);
         PlayerController._instan.chuyenhuong = true;
     }
 

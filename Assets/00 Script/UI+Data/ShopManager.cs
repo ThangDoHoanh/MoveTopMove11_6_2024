@@ -22,6 +22,7 @@ public class ShopManager : Singleton<ShopManager>
     public GameObject _hair;
     public GameObject _spnie;
     public GameObject _lefpHand;
+    public GameObject _RightHand;
     public SkinnedMeshRenderer _skinnedPlayer;
     public SkinnedMeshRenderer _pantsPlayer;
     [SerializeField] GameObject _panelShop;
@@ -157,7 +158,7 @@ public class ShopManager : Singleton<ShopManager>
         _listImageBTNShop[3].color = Color.red;//đổi màu đỏ cho shop đang được chọn
         _shopSkinnedPlayer.SetActive(true);
     }
-    public void SetItemTest(int _id, ItemType itemType)// uesr ấn Button Select thì khi ở shop nào thì lấy các type item shop đó và sinh ra
+    public void SetItem(int _id, ItemType itemType)// uesr ấn Button Select thì khi ở shop nào thì lấy các type item shop đó và sinh ra
     {
         switch (itemType)
         {
@@ -188,6 +189,19 @@ public class ShopManager : Singleton<ShopManager>
                 Debug.LogWarning("Unknown item type.");
                 break;
         }
-    }    
+    }
+    public void SetItemWeapon(int _id)// uesr ấn Button Select thì khi ở shop nào thì lấy các type item shop đó và sinh ra
+    {
+        GameObject a = ObjectPooling._instan.GetObjectparent(GameManager._instan._weapon[_id], _RightHand.transform);
+        a.SetActive(true);
+    }
+
+    public void ResetItemWeapon()
+    {
+        foreach (Transform child in _RightHand.transform)
+        {
+            child.gameObject.SetActive(false);
+        }
+    }
 
 }

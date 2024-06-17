@@ -58,16 +58,16 @@ public class Item : ItemIvenBase
                     return;
                 }
 
-                // Check the item type and the current shop to perform the appropriate action
-                ShopManager._instan.ResetActifSetPlay(_info._itemType);
+                    // Check the item type and the current shop to perform the appropriate action
+                    ShopManager._instan.ResetActifSetPlay(_info._itemType);
 
-                switch (currentShop)// ở shop nào chỉ nhận _info.id và type ở shop đó
+                    switch (currentShop)// ở shop nào chỉ nhận _info.id và type ở shop đó
                     {
                     case ShopManager.ShopType.Hair:
                         if (_info._itemType == ItemType.Hair)
                         {
                             ShopManager._instan.ResetSkin();
-                            ShopManager._instan.SetItemTest(_info._id, ItemType.Hair);
+                            ShopManager._instan.SetItem(_info._id, ItemType.Hair);
                         }
                        
                         break;
@@ -75,7 +75,7 @@ public class Item : ItemIvenBase
                         if (_info._itemType == ItemType.Pants)
                         {
                                 ShopManager._instan.ResetSkin();
-                                ShopManager._instan.SetItemTest(_info._id, ItemType.Pants);
+                                ShopManager._instan.SetItem(_info._id, ItemType.Pants);
                         }
                         
                         break;
@@ -83,14 +83,14 @@ public class Item : ItemIvenBase
                         if (_info._itemType == ItemType.LeftHand)
                         {
                                 ShopManager._instan.ResetSkin();
-                                ShopManager._instan.SetItemTest(_info._id, ItemType.LeftHand);
+                                ShopManager._instan.SetItem(_info._id, ItemType.LeftHand);
                         }
                         break;
                     case ShopManager.ShopType.Skin:
                         if (_info._itemType == ItemType.Skin)
                         {
                                 
-                                ShopManager._instan.SetItemTest(_info._id, ItemType.Skin);
+                                ShopManager._instan.SetItem(_info._id, ItemType.Skin);
 
                             if (_info._hairSkin != null)
                             {
@@ -109,8 +109,15 @@ public class Item : ItemIvenBase
                                 GameObject SkinleftHandInstance = ObjectPooling._instan.GetObjectparent(_info._LefpHandSkin, ShopManager._instan._lefpHand.transform);
                                 SkinleftHandInstance.SetActive(true);
                             }
-                           
-                        }
+                            if (_info._pantSkin != null)
+                            {
+                                    ShopManager._instan._pantsPlayer.material = _info._pantSkin;
+
+                            }
+
+
+
+                            }
                        
                         break;
                     default:

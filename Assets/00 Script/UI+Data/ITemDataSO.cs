@@ -13,6 +13,7 @@ public class ITemDataSO : ScriptableObject // khai báo data ở ScriptableObjec
     public GameObject _hairSkin;
     public GameObject _LefpHandSkin;
     public GameObject _SpineSkin;
+    public Material _pantSkin;
 
 }
 public enum ItemType

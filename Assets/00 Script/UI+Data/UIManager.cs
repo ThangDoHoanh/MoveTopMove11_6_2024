@@ -44,10 +44,12 @@ public class UIManager : Singleton<UIManager>
     public Text _textCoinPlayerPrefs;
     [Header("-----Canva playerShopeWeapon-----")]
     public Canvas _canvaShopWeapon;
+    public Button _btnBuyWeapon;
+    public Button _btnOwndeWeapon;
+    public Text _txtcontsWeapon;
+    bool _checkBuy;
     
-
-
-
+    
 
     private void Start()
     {
@@ -100,7 +102,10 @@ public class UIManager : Singleton<UIManager>
     public void PanelPlayerDead()// khi player dead
     {
         _txtAddCoin.text = GameManager._instan._addingMoney.ToString();
-        PlayerPrefs.SetInt("ContsPlayer" , GameManager._instan._addingMoney);
+        int coin = PlayerPrefs.GetInt("ContsPlayer");//tiền gốc
+        int addCoin = GameManager._instan._addingMoney;//tiền được +
+        int totalamount = coin+ addCoin;//tiền tổng
+        PlayerPrefs.SetInt("ContsPlayer" , totalamount);//lưu tiền
         _panel_ReviveNow.gameObject.SetActive(false);
         _panelBackHomeDead.gameObject.SetActive(true);
         _textBackHomeDead.text = _livetime.ToString();
@@ -130,8 +135,12 @@ public class UIManager : Singleton<UIManager>
         }
         if (_BTNBuyPlaying != null)
         {
+            OnPurchase();
             _BTNBuyPlaying.onClick.AddListener(() =>
-            {
+            { 
+                
+                if (_checkBuy == false)
+                    return;
                 StopCoroutine(_reviveCoroutine);
                 PlayerController._instan.continuePlay();
                 _panelPlaying.gameObject.SetActive(true);
@@ -153,8 +162,28 @@ public class UIManager : Singleton<UIManager>
 
         PanelPlayerDead();
     }
+    void OnPurchase()//kiểm tra xem đủ conts đề mua k
+    {
+        int playerMoney = PlayerPrefs.GetInt("ContsPlayer");
+        if (playerMoney >= 150)
+        {
+            _checkBuy = true;
+            // Người chơi đủ tiền để mua
+            playerMoney -= 150; // Trừ tiền
+           
+            PlayerPrefs.SetInt("ContsPlayer", playerMoney);
+            
+            Debug.Log("Item purchased successfully!");
+        }
+        else
+        {
+            _checkBuy = false;
+            // Người chơi không đủ tiền để mua
+            Debug.Log("bạn nghèo !");
+        }
+    }
 
-    
 
-       
+
+
 }

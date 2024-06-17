@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9005696641871131627}
   - component: {fileID: 7939947652515696998}
-  - component: {fileID: 3097651679158753301}
+  - component: {fileID: -742568081151140419}
   - component: {fileID: 3033260450266321995}
   - component: {fileID: 4858441627212888163}
   m_Layer: 16
@@ -48,7 +48,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5841812124962695178}
   m_CullTransparentMesh: 1
---- !u!114 &3097651679158753301
+--- !u!114 &-742568081151140419
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -57,16 +57,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 5841812124962695178}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b1b387767788e947b8c6ffcffeb06af, type: 3}
+  m_Script: {fileID: 11500000, guid: 44b014f93300cdf47809b3e4f09afb6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _info: {fileID: 11400000, guid: d817fa5cd9c13764e84ee41cc33b8e83, type: 2}
   _BTNbuy: {fileID: 4858441627212888163}
   _conts: {fileID: 0}
-  _select: {fileID: 0}
   _buy: {fileID: 0}
   _isOwnde: {fileID: 0}
-  _Adver: {fileID: 0}
 --- !u!114 &3033260450266321995
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -74,13 +72,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5841812124962695178}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

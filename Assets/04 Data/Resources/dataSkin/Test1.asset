@@ -15,8 +15,9 @@ MonoBehaviour:
   _id: 1
   _name: 
   _conts: 1000
-  _owned: 0
+  _owned: 1
   _itemType: 4
   _hairSkin: {fileID: 9131745830178184470, guid: d62ea4b74dadc2041a1735d776e5257c, type: 3}
   _LefpHandSkin: {fileID: 8332665095969520168, guid: 47016f1a91be7b24a8e3d4ec97e7640b, type: 3}
   _SpineSkin: {fileID: 1239407030522431728, guid: f118959b6f2692740bd674cb1498a683, type: 3}
+  _pantSkin: {fileID: 2100000, guid: 82ea9250096303247aeab88fed7687cf, type: 2}

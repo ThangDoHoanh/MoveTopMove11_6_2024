@@ -33,9 +33,11 @@ public class PlayerController : Singleton<PlayerController>
     [SerializeField] GameObject _spnie;
     [SerializeField] GameObject _lefpHand;
     [SerializeField] SkinnedMeshRenderer _skinnedPlayer;
+    
     public DataPlayer _dataSOPlayer;
 
-    public int _idHair;
+   
+    
     public void OnMove(InputAction.CallbackContext context)
     {
         _move = context.ReadValue<Vector2>();
@@ -292,51 +294,110 @@ public class PlayerController : Singleton<PlayerController>
 
         return playerPosition;
     }
-    public void SetDataPlayer()
+    public void SetDataPlayer(int _id ,ItemType _type)
     {
-        foreach (Transform _cloneHair in ShopManager._instan._hair.transform)
+        switch (_type)
         {
-            if (_cloneHair.gameObject.activeSelf == true)
-            {
+            case ItemType.Hair:
+                foreach (Transform _cloneHair in ShopManager._instan._hair.transform)
+                {
+                    if (_cloneHair.gameObject.activeSelf == true)
+                    {
+                        _dataSOPlayer._info._hairSkin = null;
+                        _dataSOPlayer._info._hairSkin = GameManager._instan._hairAvataPlayer[_id];
+                    }
+                }
+                break;
 
-                _dataSOPlayer._info._hairSkin = null;
-                _dataSOPlayer._info._hairSkin = GameManager._instan._testHair[_idHair];
-            }
-        }
-        foreach (Transform _cloneSpnie in ShopManager._instan._spnie.transform)
-        {
-            if (_cloneSpnie.gameObject.activeSelf == true)
-            {
-                _dataSOPlayer._info._SpineSkin = null;
-                _dataSOPlayer._info._SpineSkin = _cloneSpnie.gameObject;
-            }
-        }
-        foreach (Transform _cloneLefpHand in ShopManager._instan._lefpHand.transform)
-        {
-            if (_cloneLefpHand.gameObject.activeSelf == true)
-            {
-                _dataSOPlayer._info._LefpHandSkin = null;
-                _dataSOPlayer._info._LefpHandSkin = _cloneLefpHand.gameObject;
-            }
-        }
-        foreach (Transform _clonePants in ShopManager._instan._pantsPlayer.transform)
-        {
-            if (_clonePants.gameObject.activeSelf == true)
-            {
-                _dataSOPlayer._info._pantSkin = null;
-                _dataSOPlayer._info._pantSkin = _clonePants.gameObject.GetComponent<SkinnedMeshRenderer>().material;
-            }
-        }
-        foreach (Transform _cloneSkin in ShopManager._instan._skinnedPlayer.transform)
-        {
-            if (_cloneSkin.gameObject.activeSelf == true)
-            {
-                _dataSOPlayer._info._materialSkin = null;
-                _dataSOPlayer._info._materialSkin = _cloneSkin.gameObject.GetComponent<SkinnedMeshRenderer>().material;
-            };
+            case ItemType.Spine:
+                foreach (Transform _cloneSpnie in ShopManager._instan._spnie.transform)
+                {
+                    if (_cloneSpnie.gameObject.activeSelf == true)
+                    {
+                        _dataSOPlayer._info._SpineSkin = null;
+                        _dataSOPlayer._info._SpineSkin = GameManager._instan._spnieAvataPlayer[_id];
+                    }
+                }
+                break;
 
+            case ItemType.LeftHand:
+                foreach (Transform _cloneLefpHand in ShopManager._instan._lefpHand.transform)
+                {
+                    if (_cloneLefpHand.gameObject.activeSelf == true)
+                    {
+                        _dataSOPlayer._info._LefpHandSkin = null;
+                        _dataSOPlayer._info._LefpHandSkin = GameManager._instan._lefpHandAvataPlayer[_id];
+                    }
+                }
+                break;
+
+            case ItemType.Pants:
+                _dataSOPlayer._info._pantSkin = GameManager._instan._PantsPlayer[_id];
+                break;
+
+            case ItemType.Skin:
+                _dataSOPlayer._info._materialSkin = GameManager._instan._materialAvataPlayer[_id];
+                break;
+
+            default:
+                Debug.LogWarning("Unhandled item type in SetDataPlayer: " + _type);
+                break;
+        }
+
+    }
+    public void GetTingDataPlayer()
+    {
+        if (_dataSOPlayer._info._hairSkin != null)
+        {
+            GameObject hairClone = ObjectPooling._instan.GetObjectparent(_dataSOPlayer._info._hairSkin, ShopManager._instan._hair.transform);
+            hairClone.SetActive(true);
+        }
+        if (_dataSOPlayer._info._LefpHandSkin != null)
+        {
+            GameObject _lefpHandClone = ObjectPooling._instan.GetObjectparent(_dataSOPlayer._info._LefpHandSkin, ShopManager._instan._lefpHand.transform);
+            _lefpHandClone.SetActive(true);
+        }
+        if (_dataSOPlayer._info._SpineSkin != null)
+        {
+            GameObject _lefpHandClone = ObjectPooling._instan.GetObjectparent(_dataSOPlayer._info._SpineSkin, ShopManager._instan._spnie.transform);
+            _lefpHandClone.SetActive(true);
+        }
+        if (_dataSOPlayer._info._materialSkin != null)
+        {
+            ShopManager._instan._skinnedPlayer.material = _dataSOPlayer._info._materialSkin;
+        }
+        if (_dataSOPlayer._info._pantSkin != null)
+        {
+            ShopManager._instan._pantsPlayer.material = _dataSOPlayer._info._pantSkin;
+        }
+        if (_dataSOPlayer._info._Right != null)
+        {
+            GameObject _rightClone = ObjectPooling._instan.GetObjectparent(_dataSOPlayer._info._Right, ShopManager._instan._RightHand.transform);
+            _rightClone.SetActive(true);
         }
     }
+    public void GetWeapon()
+    {
+        if (_dataSOPlayer._info._Right != null)
+        {
+            GameObject _RightHandClone = ObjectPooling._instan.GetObjectparent(_dataSOPlayer._info._Right, ShopManager._instan._RightHand.transform);
+            _RightHandClone.SetActive(true);
+        }
+    }
+    public void SetWeapon(int _id)
+    {
+        foreach (Transform _cloneright in ShopManager._instan._RightHand.transform)
+        {
+            if (_cloneright.gameObject.activeSelf == true)
+            {
+                _dataSOPlayer._info._Right = null;
+                _dataSOPlayer._info._Right = GameManager._instan._weapon[_id];
+                
+            }
+        }
+    }
+    
 
+    
 
 }

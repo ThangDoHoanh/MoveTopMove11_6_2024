@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0331bbac3db18ba4999d68d2f584fa5c, type: 3}
   m_Name: itemDataHair 1
   m_EditorClassIdentifier: 
-  _id: 1
+  _id: 2
   _name: arrow
   _conts: 300
   _owned: 0
@@ -20,3 +20,6 @@ MonoBehaviour:
   _hairSkin: {fileID: 0}
   _LefpHandSkin: {fileID: 0}
   _SpineSkin: {fileID: 0}
+  _Right: {fileID: 0}
+  _pantSkin: {fileID: 0}
+  _materialSkin: {fileID: 0}

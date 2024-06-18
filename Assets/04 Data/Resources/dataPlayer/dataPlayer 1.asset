@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0331bbac3db18ba4999d68d2f584fa5c, type: 3}
-  m_Name: dataPlayer
+  m_Name: dataPlayer 1
   m_EditorClassIdentifier: 
-  _id: 0
+  _id: 1
   _name: 
   _conts: 0
   _owned: 0

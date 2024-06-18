@@ -37,7 +37,7 @@ public class EnemyController : MonoBehaviour
     {
         _isDaed = false;
         _skinnedEnemy.material = _skinEnemy[UnityEngine.Random.Range(0, 5)];
-        _skinnedPant.material = _PantEnemy[UnityEngine.Random.Range(0,7)];
+        _skinnedPant.material = _PantEnemy[UnityEngine.Random.Range(0,5)];
         if (dangchet == true)
         {
             dangchet = false;
@@ -63,7 +63,7 @@ public class EnemyController : MonoBehaviour
     private void Awake()
     {
         GameManager._instan._listTarget.Add(this.gameObject);
-        _PantEnemy = GameManager._instan._materialsPant;
+        _PantEnemy = GameManager._instan._PantsPlayer;
         _skinEnemy = GameManager._instan._materialsEnemy;
         //GameManager._instan.addList(this.transform);
     }

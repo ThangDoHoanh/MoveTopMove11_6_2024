@@ -50,6 +50,11 @@ public class ItemWeapon : ItemIvenBase
                 {
                     ShopManager._instan.ResetItemWeapon();
                     ShopManager._instan.SetItemWeapon(_info._id);
+                    
+                    PlayerController._instan.SetWeapon(_info._id);
+                    
+                    
+                    Debug.Log("zzz!");
                 });
             }
 

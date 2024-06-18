@@ -50,9 +50,11 @@ public class Item : ItemIvenBase
             {
                 _isOwnde.onClick.AddListener(() => // khi đang sở hữu thì add dữ liệu
                 {
+                    var currentShop = ShopManager._instan.currentShop;
+                   
                     // Use the current shop type to determine the action
-                var currentShop = ShopManager._instan.currentShop;
-                if (currentShop == ShopManager.ShopType.None)
+
+                    if (currentShop == ShopManager.ShopType.None)
                 {
                     Debug.LogWarning("No shop is currently selected.");
                     return;
@@ -63,67 +65,75 @@ public class Item : ItemIvenBase
 
                     switch (currentShop)// ở shop nào chỉ nhận _info.id và type ở shop đó
                     {
-                    case ShopManager.ShopType.Hair:
-                        if (_info._itemType == ItemType.Hair)
-                        {
-                            ShopManager._instan.ResetSkin();
-                            ShopManager._instan.SetItem(_info._id, ItemType.Hair);
-                            PlayerController._instan._idHair= _info._id;
-                        }
-                            
-                        break;
-                    case ShopManager.ShopType.Pants:
-                        if (_info._itemType == ItemType.Pants)
-                        {
-                                ShopManager._instan.ResetSkin();
+                        case ShopManager.ShopType.Hair:
+                            if (_info._itemType == ItemType.Hair)
+                            {
+
+                                ShopManager._instan.SetItem(_info._id, ItemType.Hair);
+                                PlayerController._instan.SetDataPlayer(_info._id, _info._itemType);
+                                PlayerController._instan.GetTingDataPlayer();
+                            }
+
+                            break;
+                        case ShopManager.ShopType.Pants:
+                            if (_info._itemType == ItemType.Pants)
+                            {
+
+
                                 ShopManager._instan.SetItem(_info._id, ItemType.Pants);
-                        }
-                            
+                                PlayerController._instan.SetDataPlayer(_info._id, _info._itemType);
+                                PlayerController._instan.GetTingDataPlayer();
+                            }
+
                             break;
-                    case ShopManager.ShopType.LeftHand:
-                        if (_info._itemType == ItemType.LeftHand)
-                        {
-                                ShopManager._instan.ResetSkin();
+                        case ShopManager.ShopType.LeftHand:
+                            if (_info._itemType == ItemType.LeftHand)
+                            {
+
                                 ShopManager._instan.SetItem(_info._id, ItemType.LeftHand);
-                        }
-                            
+                                PlayerController._instan.SetDataPlayer(_info._id, _info._itemType);
+                                PlayerController._instan.GetTingDataPlayer();
+                            }
+
                             break;
-                    case ShopManager.ShopType.Skin:
-                        if (_info._itemType == ItemType.Skin)
-                        {
-                                
+                        case ShopManager.ShopType.Skin:
+                            if (_info._itemType == ItemType.Skin)
+                            {
+
                                 ShopManager._instan.SetItem(_info._id, ItemType.Skin);
 
-                            if (_info._hairSkin != null)
-                            {
-                                GameObject SkinhairInstance = ObjectPooling._instan.GetObjectparent(_info._hairSkin, ShopManager._instan._hair.transform);
-                                SkinhairInstance.SetActive(true);
-                            }
-                            
-                            if (_info._SpineSkin != null)
-                            {
-                                GameObject SkinspineInstance = ObjectPooling._instan.GetObjectparent(_info._SpineSkin, ShopManager._instan._spnie.transform);
-                                SkinspineInstance.SetActive(true);
-                            }
-                            
-                            if (_info._LefpHandSkin != null)
-                            {
-                                GameObject SkinleftHandInstance = ObjectPooling._instan.GetObjectparent(_info._LefpHandSkin, ShopManager._instan._lefpHand.transform);
-                                SkinleftHandInstance.SetActive(true);
-                            }
-                            if (_info._pantSkin != null)
-                            {
+                                if (_info._hairSkin != null)
+                                {
+                                    GameObject SkinhairInstance = ObjectPooling._instan.GetObjectparent(_info._hairSkin, ShopManager._instan._hair.transform);
+                                    SkinhairInstance.SetActive(true);
+                                }
+
+                                if (_info._SpineSkin != null)
+                                {
+                                    GameObject SkinspineInstance = ObjectPooling._instan.GetObjectparent(_info._SpineSkin, ShopManager._instan._spnie.transform);
+                                    SkinspineInstance.SetActive(true);
+                                }
+
+                                if (_info._LefpHandSkin != null)
+                                {
+                                    GameObject SkinleftHandInstance = ObjectPooling._instan.GetObjectparent(_info._LefpHandSkin, ShopManager._instan._lefpHand.transform);
+                                    SkinleftHandInstance.SetActive(true);
+                                }
+                                if (_info._pantSkin != null)
+                                {
                                     ShopManager._instan._pantsPlayer.material = _info._pantSkin;
 
+                                }
+                                PlayerController._instan.SetDataPlayer(_info._id, _info._itemType);
+                                
                             }
-                        }
-                            
+                     
                             break;
                     default:
                         Debug.LogWarning("Unknown shop type.");
                         break;
                     }
-                    PlayerController._instan.SetDataPlayer();
+                   
                 });
             }
 

@@ -100,6 +100,13 @@ public class ShopManager : Singleton<ShopManager>
     }
     public void ResetSkin()
     {
+        PlayerController._instan.SetDataPlayer(0, ItemType.Hair);
+        PlayerController._instan.SetDataPlayer(0, ItemType.LeftHand);
+        PlayerController._instan.SetDataPlayer(0, ItemType.Spine);
+        
+        PlayerController._instan.SetDataPlayer(0, ItemType.Skin);
+       
+       
         foreach (Transform child in _hair.transform)
         {
             child.gameObject.SetActive(false);
@@ -108,13 +115,17 @@ public class ShopManager : Singleton<ShopManager>
         foreach (Transform child in _lefpHand.transform)
         {
             child.gameObject.SetActive(false);
+          
         }
         foreach (Transform child in _spnie.transform)
         {
             child.gameObject.SetActive(false);
+           
         }
-        _skinnedPlayer.material = GameManager._instan._materialAvataPlayer[3];
         _pantsPlayer.material = null;
+        PlayerController._instan.SetDataPlayer(0, ItemType.Pants);
+
+
     }
 
     public void resetBTN()// mỗi lần  uesr ấn chuyển shop thì reset lại btn
@@ -132,6 +143,10 @@ public class ShopManager : Singleton<ShopManager>
 
     public void SetCurrentShop(ShopType shopType)// Đặt trạng thái cho shop
     {
+        if (currentShop == ShopType.Skin && shopType != ShopType.Skin)
+        {
+            ResetSkin();
+        }
         currentShop = shopType;
     }
     public void setShopHair()//KHi uesr bấm vào btn shop Skin thì chạy đến hàm này và khi chuyển từ home sang canva skin
@@ -139,24 +154,34 @@ public class ShopManager : Singleton<ShopManager>
         SetCurrentShop(ShopType.Hair);
         _listImageBTNShop[0].color=Color.red; //đổi màu đỏ cho shop đang được chọn
         _shopHair.SetActive(true);
+       
+        PlayerController._instan.GetTingDataPlayer();
+
+
     }
     public void setShopPants()
     {
         SetCurrentShop(ShopType.Pants);
         _listImageBTNShop[1].color = Color.red; //đổi màu đỏ cho shop đang được chọn
         _shopPants.SetActive(true);
+        
+        PlayerController._instan.GetTingDataPlayer();
     }
     public void setShopLefphand()
     {
         SetCurrentShop(ShopType.LeftHand);
         _listImageBTNShop[2].color = Color.red;//đổi màu đỏ cho shop đang được chọn
         _shopLefphand.SetActive(true);
+        PlayerController._instan.GetTingDataPlayer();
+
+
     }
     public void setShopSkin()//KHi uesr bấm vào btn shop Skin thì chạy đến hàm này
     {
         SetCurrentShop(ShopType.Skin);
         _listImageBTNShop[3].color = Color.red;//đổi màu đỏ cho shop đang được chọn
         _shopSkinnedPlayer.SetActive(true);
+        
     }
     public void SetItem(int _id, ItemType itemType)// uesr ấn Button Select thì khi ở shop nào thì lấy các type item shop đó và sinh ra
     {
@@ -196,13 +221,14 @@ public class ShopManager : Singleton<ShopManager>
         a.SetActive(true);
     }
 
-    public void ResetItemWeapon()
+    public void ResetItemWeapon()//tắt weapon để tái sử dụng
     {
         foreach (Transform child in _RightHand.transform)
         {
             child.gameObject.SetActive(false);
         }
     }
+
 
     
 

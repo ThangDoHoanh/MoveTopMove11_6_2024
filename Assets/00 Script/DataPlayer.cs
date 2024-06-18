@@ -6,7 +6,8 @@ public class DataPlayer : ItemIvenBase
 {
     private void Start()
     {
-        //GetTingDataPlayer();
+        GetTingDataPlayer();
+        GetWeapon();
     }
 
     void GetTingDataPlayer()
@@ -40,6 +41,14 @@ public class DataPlayer : ItemIvenBase
             _rightClone.SetActive(true);
         }
     }
-     
+    public void GetWeapon()
+    {
+        if (_info._Right != null)
+        {
+            GameObject _RightHandClone = ObjectPooling._instan.GetObjectparent(_info._Right, ShopManager._instan._RightHand.transform);
+            _RightHandClone.SetActive(true);
+        }
+    }
+
 
 }

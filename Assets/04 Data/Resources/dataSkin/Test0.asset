@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0331bbac3db18ba4999d68d2f584fa5c, type: 3}
   m_Name: Test0
   m_EditorClassIdentifier: 
-  _id: 0
+  _id: 1
   _name: 
   _conts: 1500
   _owned: 1
@@ -20,4 +20,6 @@ MonoBehaviour:
   _hairSkin: {fileID: 6826213655568823271, guid: e3617d4e634a7194da1f95ef87814839, type: 3}
   _LefpHandSkin: {fileID: 0}
   _SpineSkin: {fileID: 8497430101577214254, guid: 4614c1455ca553440b286736b5c4b164, type: 3}
+  _Right: {fileID: 0}
   _pantSkin: {fileID: 2100000, guid: 0b33d7a3f945ef345b5867bdefcb805e, type: 2}
+  _materialSkin: {fileID: 0}
